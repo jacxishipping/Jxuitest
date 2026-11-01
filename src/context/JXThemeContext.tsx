@@ -11,6 +11,7 @@ export type ThemeMode = 'light' | 'dark';
 export type AccentColor = 'indigo' | 'violet' | 'emerald' | 'rose' | 'ocean';
 export type RadiusScale = 'sharp' | 'sm' | 'md' | 'lg' | 'xl';
 export type CompareMode = 'jxui' | 'split';
+export type ComponentViewMode = 'preview' | 'anatomy';
 
 export interface ToastItem {
   id: string;
@@ -111,6 +112,9 @@ interface JXThemeContextValue {
   getRadiusClass: (tier?: 'control' | 'card' | 'pill') => string;
   compareMode: CompareMode;
   setCompareMode: (c: CompareMode) => void;
+  componentViewMode: ComponentViewMode;
+  setComponentViewMode: (m: ComponentViewMode) => void;
+  toggleComponentViewMode: () => void;
   toasts: ToastItem[];
   pushToast: (toast: Omit<ToastItem, 'id' | 'createdAt'>) => string;
   triggerPromiseToast: (actionLabel: string) => void;
@@ -167,6 +171,17 @@ function getInitialCompareMode(): CompareMode {
   return 'jxui';
 }
 
+function getInitialComponentViewMode(): ComponentViewMode {
+  if (typeof window === 'undefined') return 'preview';
+  try {
+    const saved = localStorage.getItem('jxui-component-view-mode') as ComponentViewMode;
+    if (saved === 'preview' || saved === 'anatomy') return saved;
+  } catch {
+    // ignore
+  }
+  return 'preview';
+}
+
 const JXThemeContext = createContext<JXThemeContextValue | null>(null);
 
 export const JXThemeProvider: React.FC<JXThemeProviderProps> = ({
@@ -182,8 +197,13 @@ export const JXThemeProvider: React.FC<JXThemeProviderProps> = ({
   const [accent, setAccent] = useState<AccentColor>(getInitialAccent);
   const [radiusScale, setRadiusScale] = useState<RadiusScale>(getInitialRadius);
   const [compareMode, setCompareMode] = useState<CompareMode>(getInitialCompareMode);
+  const [componentViewMode, setComponentViewMode] = useState<ComponentViewMode>(getInitialComponentViewMode);
   const [toasts, setToasts] = useState<ToastItem[]>([]);
   const [stackHovered, setStackHovered] = useState(false);
+
+  const toggleComponentViewMode = useCallback(() => {
+    setComponentViewMode((prev) => (prev === 'preview' ? 'anatomy' : 'preview'));
+  }, []);
 
   const setMode = useCallback(
     (nextMode: ThemeMode) => {
@@ -248,6 +268,14 @@ export const JXThemeProvider: React.FC<JXThemeProviderProps> = ({
       // ignore
     }
   }, [compareMode]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('jxui-component-view-mode', componentViewMode);
+    } catch {
+      // ignore
+    }
+  }, [componentViewMode]);
 
   const getRadiusClass = useCallback(
     (tier: 'control' | 'card' | 'pill' = 'control') => {
@@ -340,6 +368,9 @@ export const JXThemeProvider: React.FC<JXThemeProviderProps> = ({
         getRadiusClass,
         compareMode,
         setCompareMode,
+        componentViewMode,
+        setComponentViewMode,
+        toggleComponentViewMode,
         toasts,
         pushToast,
         triggerPromiseToast,

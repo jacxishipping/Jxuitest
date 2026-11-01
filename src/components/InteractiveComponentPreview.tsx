@@ -22,7 +22,8 @@ import {
   Plus,
 } from 'lucide-react';
 import { UnifiedComponentSpec } from '../data/unifiedCatalog';
-import { useJXTheme } from '../context/JXThemeContext';
+import { useJXTheme, ComponentViewMode } from '../context/JXThemeContext';
+import { CodeAnatomyStage } from './CodeAnatomyStage';
 import {
   PlaygroundPropValues,
   PlaygroundCssVariables,
@@ -1395,30 +1396,33 @@ export interface InteractiveComponentPreviewProps {
   onJumpToShowcase?: (specNumber: number) => void;
   playgroundProps?: PlaygroundPropValues;
   playgroundCssVars?: PlaygroundCssVariables;
+  viewMode?: ComponentViewMode;
 }
 
 export const InteractiveComponentPreview: React.FC<InteractiveComponentPreviewProps> = ({
   spec,
+  onOpenDocs,
+  onJumpToShowcase,
   playgroundProps,
   playgroundCssVars,
+  viewMode,
 }) => {
+  const { componentViewMode } = useJXTheme();
+  const effectiveMode = viewMode || componentViewMode;
+
   const hasPlaygroundOverrides = Boolean(playgroundProps || playgroundCssVars);
   const stageStyle = playgroundCssVars
     ? buildPlaygroundStageStyle(playgroundCssVars, playgroundProps)
     : undefined;
 
-  const content =
+  const rawContent =
     spec.tier === 'showcase' ? (
       <ShowcaseLivePreview spec={spec} playgroundProps={playgroundProps} />
     ) : (
       <LazyPrimitivePreview spec={spec} playgroundProps={playgroundProps} />
     );
 
-  if (!hasPlaygroundOverrides) {
-    return content;
-  }
-
-  return (
+  const content = hasPlaygroundOverrides ? (
     <div
       data-testid={`playground-stage-${spec.id}`}
       style={stageStyle}
@@ -1440,7 +1444,20 @@ export const InteractiveComponentPreview: React.FC<InteractiveComponentPreviewPr
           <span>morphSuccess=true · 0ms Layout Shift</span>
         </div>
       )}
-      {content}
+      {rawContent}
     </div>
+  ) : (
+    rawContent
   );
+
+  if (effectiveMode === 'anatomy') {
+    return (
+      <CodeAnatomyStage spec={spec} onOpenDocs={onOpenDocs}>
+        {content}
+      </CodeAnatomyStage>
+    );
+  }
+
+  return content;
 };
+

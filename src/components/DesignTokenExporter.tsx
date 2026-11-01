@@ -254,19 +254,21 @@ export const DesignTokenExporter: React.FC = () => {
             </div>
 
             {/* 50–950 Tonal Scale Swatches */}
-            <div className="grid grid-cols-11 gap-1 pt-1">
-              {Object.entries(activeTonalScale.stops).map(([stop, hex]) => (
-                <div key={stop} className="space-y-1 text-center">
-                  <div
-                    className="h-7 w-full rounded-md border border-black/10 dark:border-white/10"
-                    style={{ backgroundColor: hex }}
-                    title={`${accent}-${stop}: ${hex}`}
-                  />
-                  <span className="block font-mono text-[9px] text-slate-500 dark:text-slate-400">
-                    {stop}
-                  </span>
-                </div>
-              ))}
+            <div className="overflow-x-auto pb-1">
+              <div className="grid grid-cols-11 gap-1 pt-1 min-w-[280px]">
+                {Object.entries(activeTonalScale.stops).map(([stop, hex]) => (
+                  <div key={stop} className="space-y-1 text-center">
+                    <div
+                      className="h-7 w-full rounded-md border border-black/10 dark:border-white/10"
+                      style={{ backgroundColor: hex }}
+                      title={`${accent}-${stop}: ${hex}`}
+                    />
+                    <span className="block font-mono text-[9px] text-slate-500 dark:text-slate-400">
+                      {stop}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 

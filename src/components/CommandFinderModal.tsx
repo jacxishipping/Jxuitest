@@ -411,7 +411,7 @@ export const CommandFinderModal: React.FC<CommandFinderModalProps> = ({
       onClick={onClose}
     >
       <div
-        className={`w-full max-w-2xl bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border border-slate-200/90 dark:border-slate-800 jx-elevation-3 overflow-hidden shadow-2xl ${getRadiusClass(
+        className={`w-full max-w-2xl bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border border-slate-200/90 dark:border-slate-800 jx-elevation-3 overflow-hidden shadow-2xl flex flex-col max-h-[85vh] ${getRadiusClass(
           'card'
         )}`}
         onClick={(e) => e.stopPropagation()}

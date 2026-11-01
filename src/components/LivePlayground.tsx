@@ -691,7 +691,7 @@ export const LivePlayground: React.FC<LivePlaygroundProps> = ({
               aria-label="Select component for Live Playground"
               value={activeSpec.id}
               onChange={(e) => setActiveId(e.target.value)}
-              className="px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs font-mono font-semibold text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/30"
+              className="px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs font-mono font-semibold text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/30 max-w-[190px] xs:max-w-[240px] sm:max-w-xs truncate"
             >
               <optgroup label="61 Flagship Showcases">
                 {UNIFIED_COMPONENTS_351.filter((c) => c.tier === 'showcase').map((c) => (
@@ -985,7 +985,7 @@ export const LivePlayground: React.FC<LivePlaygroundProps> = ({
                 <span className="block text-xs font-medium text-slate-700 dark:text-slate-300">
                   Surface Variant (<code className="font-mono text-[11px] text-indigo-600 dark:text-indigo-400">variant</code>)
                 </span>
-                <div className="grid grid-cols-5 gap-1.5">
+                <div className="grid grid-cols-3 sm:grid-cols-5 gap-1.5">
                   {(['contained', 'soft', 'outlined', 'glass', 'text'] as PlaygroundVariant[]).map((v) => (
                     <button
                       key={v}
@@ -1014,7 +1014,7 @@ export const LivePlayground: React.FC<LivePlaygroundProps> = ({
                 <span className="block text-xs font-medium text-slate-700 dark:text-slate-300">
                   Semantic Tone (<code className="font-mono text-[11px] text-indigo-600 dark:text-indigo-400">color</code>)
                 </span>
-                <div className="grid grid-cols-5 gap-1.5">
+                <div className="grid grid-cols-3 sm:grid-cols-5 gap-1.5">
                   {(['primary', 'secondary', 'success', 'warning', 'error'] as PlaygroundColor[]).map((c) => (
                     <button
                       key={c}

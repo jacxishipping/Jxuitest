@@ -16,6 +16,7 @@ import {
   generateDesignTokensCSS,
   getDesignTokenFilename,
   getComponentAccessibilitySpec,
+  getComponentAnatomySpec,
   evaluateAccessibilityAudit,
   JX_THEME_MODE_STORAGE_KEY,
   resolveStoredThemeMode,
@@ -36,6 +37,7 @@ import {
   saveRecentlyViewedIds,
   persistRecentlyViewedComponent,
   clearRecentlyViewedIds,
+  extractCatalogImplementationSnippet,
 } from './jxuiLogic';
 import { JXToastQueueManager } from '../components/feedback/JXSnackbar';
 import { COMPONENT_CATALOG } from '../data/catalog';
@@ -663,9 +665,101 @@ test('CommandFinderModal Recently Viewed Engine: records, deduplicates, caps, pe
   assert.deepEqual(loadRecentlyViewedIds(mockStorage), []);
 });
 
+test('getComponentAnatomySpec extracts semantic tags, ARIA roles, attributes, and slots for Code Anatomy Mode', () => {
+  // Test Button anatomy
+  const btnAnatomy = getComponentAnatomySpec({
+    id: 'jx-button',
+    name: 'JXButton',
+    category: 'inputs',
+  });
+  assert.equal(btnAnatomy.semanticTag, '<button>');
+  assert.equal(btnAnatomy.ariaRole, 'button');
+  assert.ok(btnAnatomy.ariaAttributes.length > 0);
+  assert.ok(btnAnatomy.keyboardKeys.includes('Enter'));
+  assert.equal(btnAnatomy.slots.length, 5);
+  assert.equal(btnAnatomy.slots[0].name, 'Root Container');
+  assert.ok(btnAnatomy.tokens.radiusToken.includes('--jx-radius'));
 
+  // Test Slider anatomy
+  const sliderAnatomy = getComponentAnatomySpec({
+    id: 'jx-slider',
+    name: 'JXSlider',
+    category: 'inputs',
+  });
+  assert.equal(sliderAnatomy.ariaRole, 'slider');
+  assert.ok(sliderAnatomy.ariaAttributes.some((a) => a.includes('aria-valuenow')));
+  assert.ok(sliderAnatomy.keyboardKeys.includes('ArrowLeft'));
 
+  // Test Modal/Dialog anatomy
+  const dialogAnatomy = getComponentAnatomySpec({
+    id: 'jx-dialog',
+    name: 'JXDialog',
+    category: 'feedback',
+  });
+  assert.equal(dialogAnatomy.semanticTag, '<dialog>');
+  assert.equal(dialogAnatomy.ariaRole, 'dialog');
+  assert.ok(dialogAnatomy.keyboardKeys.includes('Escape'));
 
+  // Test across all 351 unified components to guarantee zero exceptions
+  for (const comp of UNIFIED_COMPONENTS_351) {
+    const anatomy = getComponentAnatomySpec(comp);
+    assert.ok(anatomy.id, `Anatomy id missing for ${comp.id}`);
+    assert.ok(anatomy.name, `Anatomy name missing for ${comp.id}`);
+    assert.ok(anatomy.semanticTag, `Semantic tag missing for ${comp.id}`);
+    assert.ok(anatomy.ariaRole, `ARIA role missing for ${comp.id}`);
+    assert.ok(Array.isArray(anatomy.ariaAttributes), `ARIA attributes must be an array for ${comp.id}`);
+    assert.ok(anatomy.slots.length >= 3, `Expected at least 3 slots for ${comp.id}`);
+    assert.ok(anatomy.wcagContrast, `WCAG contrast missing for ${comp.id}`);
+  }
+});
 
+test('extractCatalogImplementationSnippet extracts implementation snippets from catalog specs across all 351 components', () => {
+  // Test direct jsxSnippet priority
+  const mockWithSnippet = {
+    id: 'jx-custom',
+    name: 'JXCustom',
+    jsxSnippet: '<JXCustom variant="glass">Custom Action</JXCustom>',
+  };
+  assert.equal(
+    extractCatalogImplementationSnippet(mockWithSnippet),
+    '<JXCustom variant="glass">Custom Action</JXCustom>'
+  );
 
+  // Test fallback to specA.jsxSnippet
+  const mockWithSpecA = {
+    id: 'jx-custom-2',
+    name: 'JXCustom2',
+    specA: { jsxSnippet: '<JXCustom2 active />' },
+  };
+  assert.equal(
+    extractCatalogImplementationSnippet(mockWithSpecA),
+    '<JXCustom2 active />'
+  );
+
+  // Test fallback to doc.usageCode
+  const mockWithDoc = {
+    id: 'jx-custom-3',
+    name: 'JXCustom3',
+    doc: { usageCode: 'import { JXCustom3 } from "jxui-react";\n<JXCustom3 />' },
+  };
+  assert.equal(
+    extractCatalogImplementationSnippet(mockWithDoc),
+    'import { JXCustom3 } from "jxui-react";\n<JXCustom3 />'
+  );
+
+  // Test generated fallback when no snippet is provided
+  const mockMinimal = {
+    id: 'jx-custom-empty',
+    name: 'JXCustomEmpty',
+  };
+  const generatedFallback = extractCatalogImplementationSnippet(mockMinimal);
+  assert.ok(generatedFallback.includes('<JXCustomEmpty'));
+
+  // Test that all 351 unified components return non-empty code snippets
+  for (const comp of UNIFIED_COMPONENTS_351) {
+    const snippet = extractCatalogImplementationSnippet(comp);
+    assert.ok(snippet, `Snippet should exist for ${comp.id}`);
+    assert.ok(snippet.trim().length > 0, `Snippet should not be empty for ${comp.id}`);
+  }
+});
 

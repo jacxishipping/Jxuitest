@@ -85,6 +85,19 @@ export const AppSidebar: React.FC<AppSidebarProps> = ({
 }) => {
   const { palette } = useJXTheme();
 
+  // Prevent background scroll when mobile sidebar drawer is active
+  React.useEffect(() => {
+    if (typeof document === 'undefined') return;
+    if (mobileSidebarOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileSidebarOpen]);
+
   const content = (
     <div className="flex flex-col h-full justify-between overflow-hidden bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl">
       <div className="flex flex-col flex-1 min-h-0">
@@ -399,7 +412,7 @@ export const AppSidebar: React.FC<AppSidebarProps> = ({
             className="fixed inset-0 bg-slate-900/60 backdrop-blur-xs transition-opacity"
             onClick={onCloseMobileSidebar}
           />
-          <div className="relative w-80 max-w-full bg-white dark:bg-slate-900 shadow-2xl h-full z-10">
+          <div className="relative w-80 max-w-[85vw] bg-white dark:bg-slate-900 shadow-2xl h-full z-10 flex flex-col">
             {content}
           </div>
         </div>

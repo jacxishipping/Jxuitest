@@ -40,7 +40,9 @@ import {
   ACCENT_PALETTES,
   AccentColor,
   RadiusScale,
+  ComponentViewMode,
 } from '../../context/JXThemeContext';
+import { ComponentViewModeToggle } from '../ComponentViewModeToggle';
 import {
   COMPONENT_CATALOG,
   ComponentSpec,
@@ -74,6 +76,7 @@ import {
   DEFAULT_PLAYGROUND_CSS_VARS,
   serializePlaygroundJsx,
   persistRecentlyViewedComponent,
+  extractCatalogImplementationSnippet,
 } from '../../utils/jxuiLogic';
 import {
   resolveRawComponentSource,
@@ -190,6 +193,8 @@ export const AppWorkbench: React.FC<AppWorkbenchProps> = ({
     getRadiusClass,
     compareMode,
     setCompareMode,
+    componentViewMode,
+    setComponentViewMode,
     pushToast,
   } = useJXTheme();
 
@@ -205,8 +210,10 @@ export const AppWorkbench: React.FC<AppWorkbenchProps> = ({
   const [newCollectionDesc, setNewCollectionDesc] = useState<string>('');
   const [visibleCount, setVisibleCount] = useState<number>(ITEMS_PER_PAGE);
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [copiedSourceId, setCopiedSourceId] = useState<string | null>(null);
   const [copiedMode, setCopiedMode] = useState<CopyCodeMode>('jsx');
   const [cardCodeModes, setCardCodeModes] = useState<Record<string, CopyCodeMode>>({});
+  const [cardViewModes, setCardViewModes] = useState<Record<string, ComponentViewMode>>({});
   const [expandedCodeIds, setExpandedCodeIds] = useState<Record<string, boolean>>({});
   const [rawCodeMap, setRawCodeMap] = useState<Record<string, string>>({});
 
@@ -397,6 +404,24 @@ export const AppWorkbench: React.FC<AppWorkbenchProps> = ({
     setTimeout(() => setCopiedId(null), 2000);
   };
 
+  const handleCopySource = async (spec: UnifiedComponentSpec) => {
+    const snippet = extractCatalogImplementationSnippet(spec);
+
+    await copyTextToClipboard(snippet);
+    setCopiedSourceId(spec.id);
+    persistRecentlyViewedComponent(spec.id);
+
+    pushToast({
+      title: `Copied <${spec.name} /> Source`,
+      description: `Implementation snippet for <${spec.name} /> extracted from catalog and copied to clipboard.`,
+      variant: 'success',
+    });
+
+    setTimeout(() => {
+      setCopiedSourceId(null);
+    }, 2000);
+  };
+
   const handleToggleFav = (specId: string, specName: string) => {
     const next = toggleFavorite(specId, collectionsState);
     onUpdateCollectionsState(next);
@@ -488,42 +513,82 @@ export const AppWorkbench: React.FC<AppWorkbenchProps> = ({
   const activeCategorySpec = UNIFIED_CATEGORIES_18.find((c) => c.id === activeCategory);
 
   return (
-    <main className="w-full flex-1 px-4 sm:px-8 py-6 sm:py-8 space-y-8 max-w-7xl mx-auto">
+    <main className="w-full flex-1 px-3 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-8 max-w-7xl mx-auto overflow-x-hidden">
       {/* Top Specular Ambient Glow Layer */}
-      <div className="relative w-full overflow-hidden pt-2">
+      <div className="relative w-full overflow-hidden pt-1">
         <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[760px] h-[340px] bg-gradient-to-b from-indigo-500/10 via-violet-500/5 to-transparent blur-3xl pointer-events-none rounded-full" />
 
-        {/* 1. HERO HEADER WITH LIVE ARCHITECTURAL COMPARISON STATS */}
-        <div className="relative z-10 flex flex-col gap-6">
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-4 border-b border-slate-200/80 dark:border-slate-800/80">
-            <div className="space-y-3 max-w-3xl">
+        {/* 1. HERO HEADER WITH LIVE ARCHITECTURAL STATS */}
+        <div className="relative z-10 flex flex-col gap-6 sm:gap-8">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 border-b border-slate-200/80 dark:border-slate-800/80">
+            <div className="space-y-3.5 max-w-3xl">
+              {/* Release Micro-Badge */}
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200/60 dark:border-indigo-800/60 text-indigo-700 dark:text-indigo-300 text-xs font-semibold">
-                <Sparkles className="w-3.5 h-3.5 text-indigo-500 animate-pulse" />
-                <span>JXUI v3.0.0 · The Unified React 19 Component Suite</span>
-                <span className="w-1 h-1 rounded-full bg-indigo-400" />
-                <span className="font-mono text-[11px] opacity-90">351 Total Primitives</span>
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-500" />
+                </span>
+                <span>JXUI v3.0.0</span>
+                <span className="text-slate-300 dark:text-slate-700">|</span>
+                <span>The Unified React 19 Component Suite</span>
+                <span className="text-slate-300 dark:text-slate-700">|</span>
+                <span className="font-mono text-[11px] font-bold">351 Total Primitives</span>
               </div>
 
-              <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
-                All 351 React Components. Unified &amp; Interactive.
+              {/* Editorial Title */}
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.12]">
+                All 351 React Components.
+                <span className="block text-indigo-600 dark:text-indigo-400">
+                  Unified, Kinetic &amp; Interactive.
+                </span>
               </h1>
 
-              <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 font-normal leading-relaxed">
-                61 flagship showcases + 290 atomic primitives categorized into 18 unified domains. Zero runtime CSS overhead, 200ms damped spring physics, and 100% WCAG AA certification.
+              {/* Subtitle */}
+              <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 font-normal leading-relaxed max-w-2xl">
+                61 flagship showcases and 290 atomic primitives categorized into 18 specialized domains. Built for zero runtime CSS overhead, 200ms damped spring physics, and 100% WCAG AA certification.
               </p>
+
+              {/* Action Buttons Row */}
+              <div className="flex flex-wrap items-center gap-2.5 pt-1">
+                <a
+                  href="#unified-component-suite"
+                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold bg-indigo-600 hover:bg-indigo-500 text-white shadow-sm transition-all cursor-pointer whitespace-nowrap"
+                >
+                  <Compass className="w-4 h-4" />
+                  <span>Explore 351 Primitives</span>
+                </a>
+
+                <a
+                  href="#jx-live-playground"
+                  className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-semibold bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 shadow-2xs transition-colors cursor-pointer whitespace-nowrap"
+                >
+                  <Sliders className="w-3.5 h-3.5 text-indigo-500" />
+                  <span>Live Sandbox Studio</span>
+                </a>
+
+                <button
+                  type="button"
+                  onClick={onToggleEncyclopedia}
+                  className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-semibold bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 shadow-2xs transition-colors cursor-pointer whitespace-nowrap"
+                >
+                  <BookOpen className="w-3.5 h-3.5 text-amber-500" />
+                  <span>61 Flaws vs JXUI</span>
+                </button>
+              </div>
             </div>
 
             {/* Quick NPM Install Box */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0">
-              <div className="flex items-center justify-between gap-3 px-3.5 py-2.5 rounded-xl bg-slate-900 dark:bg-slate-950 text-slate-100 font-mono text-xs border border-slate-800 shadow-md whitespace-nowrap">
+            <div className="flex flex-col sm:flex-row lg:flex-col xl:flex-row items-stretch sm:items-center gap-3 shrink-0 w-full sm:w-auto">
+              <div className="flex items-center justify-between gap-3 px-3.5 py-2.5 rounded-xl bg-slate-900 dark:bg-slate-950 text-slate-100 font-mono text-xs border border-slate-800 shadow-sm whitespace-nowrap w-full sm:w-auto">
                 <div className="flex items-center gap-2">
                   <span className="text-indigo-400 select-none">$</span>
-                  <span className="text-slate-200">npm i jxui-react</span>
+                  <span className="text-slate-200 font-medium">npm i jxui-react</span>
                 </div>
                 <button
                   type="button"
                   onClick={onCopyInstall}
                   aria-label="Copy npm install command"
+                  title="Copy $ npm i jxui-react"
                   className="p-1 rounded hover:bg-slate-800 text-slate-400 hover:text-white transition-colors cursor-pointer"
                 >
                   {copiedInstall ? (
@@ -533,73 +598,80 @@ export const AppWorkbench: React.FC<AppWorkbenchProps> = ({
                   )}
                 </button>
               </div>
-
-              <button
-                type="button"
-                onClick={onToggleEncyclopedia}
-                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors shadow-xs cursor-pointer whitespace-nowrap"
-              >
-                <span>61 Architectural Flaws</span>
-                <span className="font-mono text-[10px] px-1.5 py-0.5 rounded bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 font-bold">
-                  vs JXUI
-                </span>
-              </button>
             </div>
           </div>
 
-          {/* 3 Key Pillar Callouts */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-950/50 border border-slate-200/70 dark:border-slate-800/70 space-y-1.5">
-              <div className="flex items-center justify-between">
-                <span className="text-[11px] uppercase tracking-wider text-slate-400 font-bold">
-                  CSS Engine &amp; Styling
+          {/* 4 Key Architectural Pillar Callouts */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+            <div className="p-3.5 sm:p-4 rounded-xl bg-slate-50 dark:bg-slate-950/50 border border-slate-200/70 dark:border-slate-800/70 space-y-1.5 transition-colors hover:border-indigo-300 dark:hover:border-indigo-800">
+              <div className="flex items-center justify-between gap-1">
+                <span className="text-[10px] uppercase tracking-wider text-slate-400 font-bold">
+                  CSS Engine
                 </span>
-                <span className="px-1.5 py-0.5 rounded bg-rose-50 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400 text-[10px] font-bold">
-                  MUI: Emotion (14kB)
+                <span className="px-1.5 py-0.2 rounded bg-rose-50 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400 text-[10px] font-bold font-mono">
+                  MUI: 14kB Emotion
                 </span>
               </div>
               <div className="text-xs font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
-                <span>Zero-Runtime CSS Variables + Tailwind</span>
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                <span>Zero-Runtime CSS Variables</span>
               </div>
-              <p className="text-[11px] text-slate-500 dark:text-slate-400">
-                No CSS-in-JS compilation stalls; sub-millisecond SSR hydration.
+              <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">
+                Zero CSS-in-JS compilation stalls; instant sub-millisecond SSR hydration with Tailwind v4.
               </p>
             </div>
 
-            <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-950/50 border border-slate-200/70 dark:border-slate-800/70 space-y-1.5">
-              <div className="flex items-center justify-between">
-                <span className="text-[11px] uppercase tracking-wider text-slate-400 font-bold">
-                  Interactions &amp; Haptics
+            <div className="p-3.5 sm:p-4 rounded-xl bg-slate-50 dark:bg-slate-950/50 border border-slate-200/70 dark:border-slate-800/70 space-y-1.5 transition-colors hover:border-indigo-300 dark:hover:border-indigo-800">
+              <div className="flex items-center justify-between gap-1">
+                <span className="text-[10px] uppercase tracking-wider text-slate-400 font-bold">
+                  Haptics &amp; Motion
                 </span>
-                <span className="px-1.5 py-0.5 rounded bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 text-[10px] font-bold">
+                <span className="px-1.5 py-0.2 rounded bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 text-[10px] font-bold font-mono">
                   MUI: CSS Ripple
                 </span>
               </div>
               <div className="text-xs font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
-                <span>Tactile Damped Spring Physics (200ms)</span>
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                <span>200ms Damped Springs</span>
               </div>
-              <p className="text-[11px] text-slate-500 dark:text-slate-400">
-                Natural mass, damping scale(0.98), and 3px roving focus halos.
+              <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">
+                Kinetic mass, damping scale(0.98), and 3px roving focus halos without layout shift.
               </p>
             </div>
 
-            <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-950/50 border border-slate-200/70 dark:border-slate-800/70 space-y-1.5">
-              <div className="flex items-center justify-between">
-                <span className="text-[11px] uppercase tracking-wider text-slate-400 font-bold">
+            <div className="p-3.5 sm:p-4 rounded-xl bg-slate-50 dark:bg-slate-950/50 border border-slate-200/70 dark:border-slate-800/70 space-y-1.5 transition-colors hover:border-indigo-300 dark:hover:border-indigo-800">
+              <div className="flex items-center justify-between gap-1">
+                <span className="text-[10px] uppercase tracking-wider text-slate-400 font-bold">
                   TypeScript &amp; React 19
                 </span>
-                <span className="px-1.5 py-0.5 rounded bg-sky-50 dark:bg-sky-950/60 text-sky-600 dark:text-sky-400 text-[10px] font-bold">
-                  MUI: React 17/18
+                <span className="px-1.5 py-0.2 rounded bg-sky-50 dark:bg-sky-950/60 text-sky-600 dark:text-sky-400 text-[10px] font-bold font-mono">
+                  React 19 Native
                 </span>
               </div>
               <div className="text-xs font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
-                <span>Native React 19 Actions &amp; Strict Polymorphism</span>
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                <span>Strict Polymorphic Slots</span>
               </div>
-              <p className="text-[11px] text-slate-500 dark:text-slate-400">
-                Zero type mismatch with 'as', strict polymorphic component slots.
+              <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">
+                Native Actions and async transitions. Zero type mismatch or broken 'as' assertions.
+              </p>
+            </div>
+
+            <div className="p-3.5 sm:p-4 rounded-xl bg-slate-50 dark:bg-slate-950/50 border border-slate-200/70 dark:border-slate-800/70 space-y-1.5 transition-colors hover:border-indigo-300 dark:hover:border-indigo-800">
+              <div className="flex items-center justify-between gap-1">
+                <span className="text-[10px] uppercase tracking-wider text-slate-400 font-bold">
+                  Accessibility
+                </span>
+                <span className="px-1.5 py-0.2 rounded bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 text-[10px] font-bold font-mono">
+                  100% WCAG 2.1 AA
+                </span>
+              </div>
+              <div className="text-xs font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                <span>17.4:1 Automated Contrast</span>
+              </div>
+              <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">
+                Complete keyboard navigation, live ARIA regions, and automated high-contrast ratios.
               </p>
             </div>
           </div>
@@ -607,149 +679,153 @@ export const AppWorkbench: React.FC<AppWorkbenchProps> = ({
       </div>
 
       {/* 2. RUNTIME THEME STUDIO & CONTROLS TOOLBAR */}
-      <div className="p-4 sm:p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-xs flex flex-col md:flex-row items-center justify-between gap-4">
-        <div className="flex flex-wrap items-center gap-4 sm:gap-6">
-          {/* Palette Selector */}
-          <div className="flex items-center gap-2">
-            <span className="text-xs uppercase tracking-wider text-slate-400 font-bold">
-              Accent:
-            </span>
-            <div className="flex items-center gap-1.5 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl">
-              {(Object.keys(ACCENT_PALETTES) as AccentColor[]).map((key) => {
-                const pal = ACCENT_PALETTES[key];
-                const active = accent === key;
-                return (
-                  <button
-                    key={key}
-                    type="button"
-                    onClick={() => setAccent(key)}
-                    style={{ backgroundColor: pal.hex }}
-                    title={`${pal.name} Palette`}
-                    className={`w-5 h-5 rounded-full transition-transform cursor-pointer ${
-                      active
-                        ? 'ring-2 ring-indigo-500 ring-offset-2 scale-110'
-                        : 'opacity-70 hover:opacity-100'
-                    }`}
-                  />
-                );
-              })}
+      <div className="p-4 sm:p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-xs space-y-4">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+          {/* Studio Controls: Accent & Radius & View Mode */}
+          <div className="flex flex-wrap items-center gap-4 sm:gap-6">
+            {/* Palette Selector */}
+            <div className="flex items-center gap-2">
+              <span className="text-[11px] uppercase tracking-wider text-slate-400 font-bold shrink-0">
+                Accent:
+              </span>
+              <div className="flex items-center gap-1.5 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl">
+                {(Object.keys(ACCENT_PALETTES) as AccentColor[]).map((key) => {
+                  const pal = ACCENT_PALETTES[key];
+                  const active = accent === key;
+                  return (
+                    <button
+                      key={key}
+                      type="button"
+                      onClick={() => setAccent(key)}
+                      style={{ backgroundColor: pal.hex }}
+                      title={`${pal.name} Palette`}
+                      aria-label={`${pal.name} Accent Color`}
+                      className={`w-5 h-5 rounded-full transition-transform cursor-pointer ${
+                        active
+                          ? 'ring-2 ring-indigo-500 ring-offset-2 scale-110'
+                          : 'opacity-70 hover:opacity-100'
+                      }`}
+                    />
+                  );
+                })}
+              </div>
             </div>
-          </div>
 
-          {/* Radius Scale Multipliers */}
-          <div className="flex items-center gap-2">
-            <span className="text-xs uppercase tracking-wider text-slate-400 font-bold">
-              Radius:
-            </span>
-            <div className="flex items-center bg-slate-100 dark:bg-slate-800 p-1 rounded-xl text-xs font-semibold">
-              {RADIUS_OPTIONS.map((r) => (
+            {/* Radius Scale Multipliers */}
+            <div className="flex items-center gap-2">
+              <span className="text-[11px] uppercase tracking-wider text-slate-400 font-bold shrink-0">
+                Radius:
+              </span>
+              <div className="flex items-center bg-slate-100 dark:bg-slate-800 p-1 rounded-xl text-xs font-semibold overflow-x-auto max-w-full">
+                {RADIUS_OPTIONS.map((r) => (
+                  <button
+                    key={r.id}
+                    type="button"
+                    onClick={() => setRadiusScale(r.id)}
+                    className={`px-2.5 py-1 rounded-lg transition-colors cursor-pointer whitespace-nowrap ${
+                      radiusScale === r.id
+                        ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-2xs font-bold'
+                        : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                    }`}
+                  >
+                    {r.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Compare Mode */}
+            <div className="flex items-center gap-2">
+              <span className="text-[11px] uppercase tracking-wider text-slate-400 font-bold shrink-0">
+                View:
+              </span>
+              <div className="flex items-center bg-slate-100 dark:bg-slate-800 p-1 rounded-xl text-xs font-semibold">
                 <button
-                  key={r.id}
                   type="button"
-                  onClick={() => setRadiusScale(r.id)}
-                  className={`px-2.5 py-1 rounded-lg transition-colors cursor-pointer ${
-                    radiusScale === r.id
-                      ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-xs font-bold'
+                  onClick={() => setCompareMode('jxui')}
+                  className={`px-3 py-1 rounded-lg transition-colors cursor-pointer whitespace-nowrap ${
+                    compareMode === 'jxui'
+                      ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-2xs font-bold'
                       : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                   }`}
                 >
-                  {r.label}
+                  JXUI Pure
                 </button>
-              ))}
+                <button
+                  type="button"
+                  onClick={() => setCompareMode('split')}
+                  className={`px-3 py-1 rounded-lg transition-colors cursor-pointer whitespace-nowrap ${
+                    compareMode === 'split'
+                      ? 'bg-indigo-600 text-white shadow-2xs font-bold'
+                      : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                  }`}
+                >
+                  MUI Split
+                </button>
+              </div>
             </div>
           </div>
 
-          {/* Compare Mode */}
-          <div className="flex items-center gap-2">
-            <span className="text-xs uppercase tracking-wider text-slate-400 font-bold">
-              View:
-            </span>
-            <div className="flex items-center bg-slate-100 dark:bg-slate-800 p-1 rounded-xl text-xs font-semibold">
-              <button
-                type="button"
-                onClick={() => setCompareMode('jxui')}
-                className={`px-3 py-1 rounded-lg transition-colors cursor-pointer ${
-                  compareMode === 'jxui'
-                    ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-xs font-bold'
-                    : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-                }`}
-              >
-                JXUI Pure
-              </button>
-              <button
-                type="button"
-                onClick={() => setCompareMode('split')}
-                className={`px-3 py-1 rounded-lg transition-colors cursor-pointer ${
-                  compareMode === 'split'
-                    ? 'bg-indigo-600 text-white shadow-xs font-bold'
-                    : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-                }`}
-              >
-                MUI vs JXUI Split
-              </button>
-            </div>
+          {/* Tactile & Toast Quick Actions */}
+          <div className="flex flex-wrap items-center gap-2 shrink-0 pt-2 lg:pt-0 border-t lg:border-t-0 border-slate-100 dark:border-slate-800/80">
+            <button
+              type="button"
+              onClick={onToggleSpringPress}
+              title={springPressActive ? 'Spring Press Physics Active (scale 0.98)' : 'Physics Springs Disabled'}
+              className={`px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-medium border transition-colors cursor-pointer flex items-center gap-1.5 whitespace-nowrap ${
+                springPressActive
+                  ? 'bg-indigo-50 dark:bg-indigo-950/60 border-indigo-300 dark:border-indigo-700 text-indigo-700 dark:text-indigo-300 font-bold'
+                  : 'bg-slate-100 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-500'
+              }`}
+            >
+              <Zap className="w-3.5 h-3.5 text-indigo-500" />
+              <span>Spring (200ms)</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={onToggleHaloFocus}
+              title={haloFocusActive ? '3px Roving Tactile Focus Halos Active' : 'Focus Halos Disabled'}
+              className={`px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-medium border transition-colors cursor-pointer flex items-center gap-1.5 whitespace-nowrap ${
+                haloFocusActive
+                  ? 'bg-emerald-50 dark:bg-emerald-950/60 border-emerald-300 dark:border-emerald-700 text-emerald-700 dark:text-emerald-300 font-bold'
+                  : 'bg-slate-100 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-500'
+              }`}
+            >
+              <Sliders className="w-3.5 h-3.5 text-emerald-500" />
+              <span>3px Focus Halo</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={onTriggerToast}
+              className="px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-colors cursor-pointer whitespace-nowrap"
+            >
+              Test 3D Toast
+            </button>
+
+            <button
+              type="button"
+              onClick={() => {
+                setAccent('indigo');
+                setRadiusScale('md');
+                setCompareMode('jxui');
+                if (!springPressActive) onToggleSpringPress();
+                if (!haloFocusActive) onToggleHaloFocus();
+              }}
+              title="Reset Studio to Defaults"
+              className="p-1.5 rounded-xl text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors flex items-center gap-1 text-xs cursor-pointer"
+            >
+              <RotateCcw className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Reset</span>
+            </button>
           </div>
-        </div>
-
-        {/* Tactile & Toast Quick Actions */}
-        <div className="flex items-center gap-2 shrink-0">
-          <button
-            type="button"
-            onClick={onToggleSpringPress}
-            title={springPressActive ? 'Spring Press Physics Active (scale 0.98)' : 'Physics Springs Disabled'}
-            className={`px-3 py-1.5 rounded-xl text-xs font-medium border transition-colors cursor-pointer flex items-center gap-1.5 ${
-              springPressActive
-                ? 'bg-indigo-50 dark:bg-indigo-950/60 border-indigo-300 dark:border-indigo-700 text-indigo-700 dark:text-indigo-300 font-bold'
-                : 'bg-slate-100 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-500'
-            }`}
-          >
-            <Zap className="w-3.5 h-3.5 text-indigo-500" />
-            <span>Spring (200ms)</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={onToggleHaloFocus}
-            title={haloFocusActive ? '3px Roving Tactile Focus Halos Active' : 'Focus Halos Disabled'}
-            className={`px-3 py-1.5 rounded-xl text-xs font-medium border transition-colors cursor-pointer flex items-center gap-1.5 ${
-              haloFocusActive
-                ? 'bg-emerald-50 dark:bg-emerald-950/60 border-emerald-300 dark:border-emerald-700 text-emerald-700 dark:text-emerald-300 font-bold'
-                : 'bg-slate-100 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-500'
-            }`}
-          >
-            <Sliders className="w-3.5 h-3.5 text-emerald-500" />
-            <span>3px Focus Halo</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={onTriggerToast}
-            className="px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-colors cursor-pointer"
-          >
-            Test 3D Toast
-          </button>
-
-          <button
-            type="button"
-            onClick={() => {
-              setAccent('indigo');
-              setRadiusScale('md');
-              setCompareMode('jxui');
-              onToggleSpringPress();
-              onToggleHaloFocus();
-            }}
-            title="Reset Studio to Defaults"
-            className="p-1.5 rounded-xl text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors flex items-center gap-1 text-xs cursor-pointer"
-          >
-            <RotateCcw className="w-3.5 h-3.5" />
-            <span>Reset</span>
-          </button>
         </div>
       </div>
 
-      {/* 3. UNIFIED 18-CATEGORY HORIZONTAL PILL SELECTOR RAIL */}
-      <div className="relative">
-        <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-slate-200 dark:scrollbar-thumb-slate-800 scroll-smooth">
+      {/* 3. UNIFIED 18-CATEGORY HORIZONTAL RAIL WITH SCROLL SHADOWS */}
+      <div className="relative group">
+        <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-slate-200 dark:scrollbar-thumb-slate-800 scroll-smooth px-1">
           {/* All Categories Button */}
           <button
             type="button"
@@ -804,116 +880,129 @@ export const AppWorkbench: React.FC<AppWorkbenchProps> = ({
 
       {/* 4. MASTER COMPONENT EXPLORER: FILTERS & CONTROLS BAR */}
       <div id="unified-component-suite" className="scroll-mt-24 space-y-4">
-        <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-xs flex flex-col md:flex-row items-center justify-between gap-4">
-          {/* Left: Search input */}
-          <div className="relative w-full md:w-80 flex items-center">
-            <Search className="w-4 h-4 absolute left-3 text-slate-400 pointer-events-none" />
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search components, tags, props..."
-              className="w-full pl-9 pr-8 py-2 rounded-xl text-xs bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/30"
-            />
-            {searchQuery && (
+        <div className="p-4 sm:p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-xs space-y-3.5">
+          {/* Top Row: Search input + Tier Tabs */}
+          <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3">
+            {/* Search Input */}
+            <div className="relative w-full lg:w-80 flex items-center shrink-0">
+              <Search className="w-4 h-4 absolute left-3 text-slate-400 pointer-events-none" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search components, props, flaws, tags..."
+                aria-label="Search components"
+                className="w-full pl-9 pr-8 py-2 rounded-xl text-xs bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/30"
+              />
+              {searchQuery && (
+                <button
+                  type="button"
+                  onClick={() => setSearchQuery('')}
+                  aria-label="Clear search"
+                  className="absolute right-2.5 text-slate-400 hover:text-slate-700 dark:hover:text-white text-xs font-bold"
+                >
+                  ✕
+                </button>
+              )}
+            </div>
+
+            {/* Tier Tabs (All 351, Showcases 61, Primitives 290, Starred) */}
+            <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl text-xs font-semibold overflow-x-auto max-w-full">
               <button
                 type="button"
-                onClick={() => setSearchQuery('')}
-                className="absolute right-2.5 text-slate-400 hover:text-slate-700 dark:hover:text-white text-xs font-bold"
+                onClick={() => setActiveTier('all')}
+                className={`px-3 py-1.5 rounded-lg transition-colors cursor-pointer whitespace-nowrap ${
+                  activeTier === 'all'
+                    ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-2xs font-bold'
+                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                }`}
               >
-                ✕
+                All (351)
               </button>
-            )}
+              <button
+                type="button"
+                onClick={() => setActiveTier('showcase')}
+                className={`px-3 py-1.5 rounded-lg transition-colors cursor-pointer flex items-center gap-1 whitespace-nowrap ${
+                  activeTier === 'showcase'
+                    ? 'bg-white dark:bg-slate-900 text-indigo-600 dark:text-indigo-400 shadow-2xs font-bold'
+                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                }`}
+              >
+                <Star className="w-3 h-3 fill-amber-400 text-amber-500 shrink-0" />
+                <span>Showcases (61)</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveTier('primitive')}
+                className={`px-3 py-1.5 rounded-lg transition-colors cursor-pointer whitespace-nowrap ${
+                  activeTier === 'primitive'
+                    ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-2xs font-bold'
+                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                }`}
+              >
+                Primitives (290)
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveTier('favorites')}
+                className={`px-3 py-1.5 rounded-lg transition-colors cursor-pointer flex items-center gap-1 whitespace-nowrap ${
+                  activeTier === 'favorites'
+                    ? 'bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300 shadow-2xs font-bold'
+                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                }`}
+              >
+                <Star className="w-3 h-3 text-amber-500 fill-amber-400 shrink-0" />
+                <span>Starred ({collectionsState.favorites.length})</span>
+              </button>
+            </div>
           </div>
 
-          {/* Center: Tier Tabs */}
-          <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl text-xs font-semibold w-full md:w-auto overflow-x-auto">
-            <button
-              type="button"
-              onClick={() => setActiveTier('all')}
-              className={`px-3 py-1.5 rounded-lg transition-colors cursor-pointer ${
-                activeTier === 'all'
-                  ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-xs font-bold'
-                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-              }`}
-            >
-              All (351)
-            </button>
-            <button
-              type="button"
-              onClick={() => setActiveTier('showcase')}
-              className={`px-3 py-1.5 rounded-lg transition-colors cursor-pointer flex items-center gap-1 ${
-                activeTier === 'showcase'
-                  ? 'bg-white dark:bg-slate-900 text-indigo-600 dark:text-indigo-400 shadow-xs font-bold'
-                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-              }`}
-            >
-              <Star className="w-3 h-3 fill-amber-400 text-amber-500" />
-              <span>Showcases (61)</span>
-            </button>
-            <button
-              type="button"
-              onClick={() => setActiveTier('primitive')}
-              className={`px-3 py-1.5 rounded-lg transition-colors cursor-pointer ${
-                activeTier === 'primitive'
-                  ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-xs font-bold'
-                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-              }`}
-            >
-              Primitives (290)
-            </button>
-            <button
-              type="button"
-              onClick={() => setActiveTier('favorites')}
-              className={`px-3 py-1.5 rounded-lg transition-colors cursor-pointer flex items-center gap-1 ${
-                activeTier === 'favorites'
-                  ? 'bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300 shadow-xs font-bold'
-                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-              }`}
-            >
-              <Star className="w-3 h-3 text-amber-500 fill-amber-400" />
-              <span>Starred ({collectionsState.favorites.length})</span>
-            </button>
-          </div>
+          {/* Lower Row: View Mode Toggle + Filters & Collections */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2.5 border-t border-slate-100 dark:border-slate-800/80">
+            {/* View Toggle: Preview Mode vs Code Anatomy Mode */}
+            <div className="shrink-0">
+              <ComponentViewModeToggle size="md" />
+            </div>
 
-          {/* Right: Dropdowns & Collections Manager */}
-          <div className="flex flex-wrap items-center gap-2 w-full md:w-auto justify-end text-xs">
-            {/* Difficulty Dropdown */}
-            <select
-              value={selectedDifficulty}
-              onChange={(e) => setSelectedDifficulty(e.target.value)}
-              aria-label="Filter by difficulty"
-              className="px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-700 dark:text-slate-200 text-xs focus:outline-none"
-            >
-              <option value="all">All Difficulties</option>
-              <option value="beginner">Beginner</option>
-              <option value="intermediate">Intermediate</option>
-              <option value="advanced">Advanced</option>
-              <option value="enterprise">Enterprise</option>
-            </select>
+            {/* Dropdowns & Collections Manager */}
+            <div className="flex flex-wrap items-center gap-2 text-xs">
+              {/* Difficulty Dropdown */}
+              <select
+                value={selectedDifficulty}
+                onChange={(e) => setSelectedDifficulty(e.target.value)}
+                aria-label="Filter by difficulty"
+                className="px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-700 dark:text-slate-200 text-xs focus:outline-none"
+              >
+                <option value="all">All Difficulties</option>
+                <option value="beginner">Beginner</option>
+                <option value="intermediate">Intermediate</option>
+                <option value="advanced">Advanced</option>
+                <option value="enterprise">Enterprise</option>
+              </select>
 
-            {/* Framework Dropdown */}
-            <select
-              value={selectedFramework}
-              onChange={(e) => setSelectedFramework(e.target.value)}
-              aria-label="Filter by framework"
-              className="px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-700 dark:text-slate-200 text-xs focus:outline-none"
-            >
-              <option value="all">All Frameworks</option>
-              <option value="React 19">React 19</option>
-              <option value="Next.js 15">Next.js 15</option>
-              <option value="Vite">Vite</option>
-            </select>
+              {/* Framework Dropdown */}
+              <select
+                value={selectedFramework}
+                onChange={(e) => setSelectedFramework(e.target.value)}
+                aria-label="Filter by framework"
+                className="px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-700 dark:text-slate-200 text-xs focus:outline-none"
+              >
+                <option value="all">All Frameworks</option>
+                <option value="React 19">React 19</option>
+                <option value="Next.js 15">Next.js 15</option>
+                <option value="Vite">Vite</option>
+              </select>
 
-            {/* Collections Manager Button */}
-            <button
-              type="button"
-              onClick={() => setShowManageCollections(true)}
-              className="px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors flex items-center gap-1.5 font-medium cursor-pointer"
-            >
-              <Layers className="w-3.5 h-3.5 text-indigo-500" />
-              <span>Collections ({collectionsState.collections.length})</span>
-            </button>
+              {/* Collections Manager Button */}
+              <button
+                type="button"
+                onClick={() => setShowManageCollections(true)}
+                className="px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors flex items-center gap-1.5 font-medium cursor-pointer"
+              >
+                <Layers className="w-3.5 h-3.5 text-indigo-500" />
+                <span>Collections ({collectionsState.collections.length})</span>
+              </button>
+            </div>
           </div>
         </div>
 
@@ -1139,6 +1228,30 @@ export const AppWorkbench: React.FC<AppWorkbenchProps> = ({
                           <span>Changelog</span>
                         </button>
 
+                        {/* Per-Card Anatomy View Toggle */}
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setCardViewModes((prev) => {
+                              const curr = prev[spec.id] || componentViewMode;
+                              return { ...prev, [spec.id]: curr === 'anatomy' ? 'preview' : 'anatomy' };
+                            });
+                          }}
+                          className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-mono font-semibold border transition-colors whitespace-nowrap cursor-pointer ${
+                            (cardViewModes[spec.id] || componentViewMode) === 'anatomy'
+                              ? 'bg-indigo-600 text-white border-indigo-600 shadow-2xs'
+                              : 'bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-400 border-indigo-200 dark:border-indigo-800/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/60'
+                          }`}
+                          title={
+                            (cardViewModes[spec.id] || componentViewMode) === 'anatomy'
+                              ? 'Switch this component to Preview Mode'
+                              : 'Switch this component to Code Anatomy Mode'
+                          }
+                        >
+                          <Layers className="w-2.5 h-2.5 shrink-0" />
+                          <span>{(cardViewModes[spec.id] || componentViewMode) === 'anatomy' ? 'Anatomy Active' : 'Anatomy'}</span>
+                        </button>
+
                         <button
                           type="button"
                           onClick={() => handleToggleCardCode(spec)}
@@ -1154,22 +1267,23 @@ export const AppWorkbench: React.FC<AppWorkbenchProps> = ({
 
                         <button
                           type="button"
-                          onClick={() => handleCopyCode(spec)}
-                          className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-semibold transition-colors whitespace-nowrap cursor-pointer ${
-                            isCopied
+                          onClick={() => handleCopySource(spec)}
+                          className={`inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-semibold transition-colors whitespace-nowrap cursor-pointer ${
+                            copiedSourceId === spec.id
                               ? 'bg-emerald-600 text-white'
                               : 'bg-indigo-600 hover:bg-indigo-500 text-white'
                           }`}
+                          title={`Extract and copy implementation snippet for <${spec.name} /> from catalog`}
                         >
-                          {isCopied ? (
+                          {copiedSourceId === spec.id ? (
                             <>
                               <Check className="w-2.5 h-2.5 shrink-0" />
-                              <span>Copied {copiedMode === 'raw' ? 'Raw' : 'JSX'}!</span>
+                              <span>Copied Source!</span>
                             </>
                           ) : (
                             <>
                               <Copy className="w-2.5 h-2.5 shrink-0" />
-                              <span>Copy {currentMode === 'raw' ? 'Raw' : 'JSX'}</span>
+                              <span>Copy Source</span>
                             </>
                           )}
                         </button>
@@ -1181,6 +1295,7 @@ export const AppWorkbench: React.FC<AppWorkbenchProps> = ({
                       <InteractiveComponentPreview
                         spec={spec}
                         onOpenDocs={setActiveDocSpec}
+                        viewMode={cardViewModes[spec.id] || componentViewMode}
                         playgroundProps={isPlaygroundExpanded ? activeCardProps || DEFAULT_PLAYGROUND_PROPS : activeCardProps}
                         playgroundCssVars={isPlaygroundExpanded ? activeCardCssVars || DEFAULT_PLAYGROUND_CSS_VARS : activeCardCssVars}
                         onJumpToShowcase={onJumpToComponent ? (specNumber: number) => {
@@ -1264,26 +1379,26 @@ export const AppWorkbench: React.FC<AppWorkbenchProps> = ({
                         <span>Inspect Docs</span>
                       </button>
 
-                      {/* Copy Code Button */}
+                      {/* Copy Source Button */}
                       <button
                         type="button"
-                        onClick={() => handleCopyCode(spec)}
-                        title={`Copy ${currentMode === 'raw' ? 'Raw Implementation' : 'JSX'} Code`}
-                        className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border text-xs font-semibold transition-colors cursor-pointer ${
-                          isCopied
+                        onClick={() => handleCopySource(spec)}
+                        title={`Copy implementation snippet for <${spec.name} /> from catalog`}
+                        className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-semibold transition-colors cursor-pointer ${
+                          copiedSourceId === spec.id
                             ? 'bg-emerald-50 dark:bg-emerald-950/50 border-emerald-300 dark:border-emerald-700 text-emerald-700 dark:text-emerald-300'
-                            : 'border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200'
+                            : 'border-slate-200 dark:border-slate-800 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 hover:border-indigo-300 dark:hover:border-indigo-800 text-slate-700 dark:text-slate-200'
                         }`}
                       >
-                        {isCopied ? (
+                        {copiedSourceId === spec.id ? (
                           <>
                             <Check className="w-3.5 h-3.5 text-emerald-500" />
-                            <span>Copied</span>
+                            <span>Copied Source!</span>
                           </>
                         ) : (
                           <>
-                            <Copy className="w-3.5 h-3.5" />
-                            <span>Copy Code</span>
+                            <Copy className="w-3.5 h-3.5 text-indigo-500" />
+                            <span>Copy Source</span>
                           </>
                         )}
                       </button>

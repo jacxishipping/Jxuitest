@@ -29,4 +29,5 @@ export * from './GitHubPage';
 export * from './layout/AppHeader';
 export * from './layout/AppSidebar';
 export * from './layout/AppWorkbench';
-
+export * from './ComponentViewModeToggle';
+export * from './CodeAnatomyStage';

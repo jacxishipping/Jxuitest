@@ -147,7 +147,7 @@ export const GitHubPage: React.FC<GitHubPageProps> = ({
           </div>
 
           {/* GitHub Action Pill Controls */}
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             {/* Sponsor */}
             <a
               href="#sponsors"

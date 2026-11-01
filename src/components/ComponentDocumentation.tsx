@@ -28,6 +28,8 @@ import {
 } from '../utils/jxuiLogic';
 import { InlineLivePlayground } from './LivePlayground';
 import { resolveRawComponentSource, getCachedRawSource, copyTextToClipboard } from '../utils/rawSourceLoader';
+import { ComponentViewModeToggle } from './ComponentViewModeToggle';
+import { CodeAnatomyStage } from './CodeAnatomyStage';
 
 export interface ComponentDocumentationProps {
   spec: ComponentSpec;
@@ -50,7 +52,7 @@ export const ComponentDocumentation: React.FC<ComponentDocumentationProps> = ({
   codeConfigPanel,
   defaultShowCode = false,
 }) => {
-  const { getRadiusClass, compareMode, pushToast } = useJXTheme();
+  const { getRadiusClass, compareMode, componentViewMode, pushToast } = useJXTheme();
   const [showCode, setShowCode] = useState(defaultShowCode);
   const [showSpecGuide, setShowSpecGuide] = useState(false);
   const [showPlayground, setShowPlayground] = useState(false);
@@ -156,6 +158,7 @@ export const ComponentDocumentation: React.FC<ComponentDocumentationProps> = ({
         </div>
 
         <div className="flex flex-wrap items-center gap-2 shrink-0">
+          <ComponentViewModeToggle size="sm" />
           {headerControls}
           <button
             type="button"
@@ -351,17 +354,32 @@ export const ComponentDocumentation: React.FC<ComponentDocumentationProps> = ({
               </span>
               <span className="font-mono">jxui-react@3.0.0</span>
             </div>
-            <div style={showPlayground ? buildPlaygroundStageStyle(pgCssVars, pgProps) : undefined}>
-              {children}
-            </div>
+            {componentViewMode === 'anatomy' ? (
+              <CodeAnatomyStage spec={spec}>
+                <div style={showPlayground ? buildPlaygroundStageStyle(pgCssVars, pgProps) : undefined}>
+                  {children}
+                </div>
+              </CodeAnatomyStage>
+            ) : (
+              <div style={showPlayground ? buildPlaygroundStageStyle(pgCssVars, pgProps) : undefined}>
+                {children}
+              </div>
+            )}
           </div>
         </div>
       ) : (
-        <div
-          className="p-4 sm:p-6 min-w-0 overflow-x-auto"
-          style={showPlayground ? buildPlaygroundStageStyle(pgCssVars, pgProps) : undefined}
-        >
-          {children}
+        <div className="p-4 sm:p-6 min-w-0 overflow-x-auto">
+          {componentViewMode === 'anatomy' ? (
+            <CodeAnatomyStage spec={spec}>
+              <div style={showPlayground ? buildPlaygroundStageStyle(pgCssVars, pgProps) : undefined}>
+                {children}
+              </div>
+            </CodeAnatomyStage>
+          ) : (
+            <div style={showPlayground ? buildPlaygroundStageStyle(pgCssVars, pgProps) : undefined}>
+              {children}
+            </div>
+          )}
         </div>
       )}
 

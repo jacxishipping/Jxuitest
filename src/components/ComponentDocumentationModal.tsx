@@ -3,6 +3,7 @@ import { UnifiedComponentSpec } from '../data/unifiedCatalog';
 import { useJXTheme } from '../context/JXThemeContext';
 import { InteractiveComponentPreview } from './InteractiveComponentPreview';
 import { InlineLivePlayground } from './LivePlayground';
+import { ComponentViewModeToggle } from './ComponentViewModeToggle';
 import { JXCollectionsState, toggleFavorite, isFavorite, addComponentToCollection } from '../utils/jxuiCollections';
 import {
   CopyCodeMode,
@@ -196,19 +197,19 @@ export const ComponentDocumentationModal: React.FC<ComponentDocumentationModalPr
         )}`}
       >
         {/* Modal Top Bar */}
-        <div className="px-6 py-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50/70 dark:bg-slate-950/60 shrink-0">
-          <div className="flex items-center gap-3">
-            <div className={`w-9 h-9 rounded-xl flex items-center justify-center text-white shadow-sm ${palette.bg}`}>
+        <div className="px-4 sm:px-6 py-3 sm:py-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50/70 dark:bg-slate-950/60 shrink-0 gap-2">
+          <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+            <div className={`w-8 h-8 sm:w-9 sm:h-9 rounded-xl flex items-center justify-center text-white shadow-sm shrink-0 ${palette.bg}`}>
               <BookOpen className="w-4 h-4" />
             </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <h2 id="doc-modal-title" className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <div className="min-w-0">
+              <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+                <h2 id="doc-modal-title" className="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-1.5 sm:gap-2">
                   <span>&lt;{spec.name} /&gt;</span>
                   <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300">
                     v{spec.version || '3.0.0'}
                   </span>
-                  <span className={`px-2 py-0.5 rounded text-[10px] font-mono font-bold ${
+                  <span className={`px-2 py-0.5 rounded text-[10px] font-mono font-bold hidden xs:inline ${
                     spec.tier === 'showcase'
                       ? 'bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300'
                       : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400'
@@ -217,7 +218,7 @@ export const ComponentDocumentationModal: React.FC<ComponentDocumentationModalPr
                   </span>
                 </h2>
               </div>
-              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 truncate max-w-xs sm:max-w-md">
                 {spec.subtitle}
               </p>
             </div>
@@ -342,7 +343,7 @@ export const ComponentDocumentationModal: React.FC<ComponentDocumentationModalPr
         </div>
 
         {/* Documentation Tab Navigation */}
-        <div className="px-6 border-b border-slate-200 dark:border-slate-800 flex items-center gap-1 overflow-x-auto text-xs font-semibold bg-white dark:bg-slate-900 shrink-0">
+        <div className="px-4 sm:px-6 border-b border-slate-200 dark:border-slate-800 flex items-center gap-1 overflow-x-auto text-xs font-semibold bg-white dark:bg-slate-900 shrink-0 scrollbar-none">
           {[
             { id: 'overview', label: 'Overview & Sandbox' },
             { id: 'props', label: 'Props Specification' },
@@ -354,7 +355,7 @@ export const ComponentDocumentationModal: React.FC<ComponentDocumentationModalPr
               key={tab.id}
               type="button"
               onClick={() => setActiveTab(tab.id as any)}
-              className={`px-3.5 py-3 border-b-2 transition-colors cursor-pointer shrink-0 ${
+              className={`px-3 sm:px-3.5 py-3 border-b-2 transition-colors cursor-pointer shrink-0 whitespace-nowrap ${
                 activeTab === tab.id
                   ? 'border-indigo-600 text-indigo-600 dark:text-indigo-400 font-bold'
                   : 'border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
@@ -366,7 +367,7 @@ export const ComponentDocumentationModal: React.FC<ComponentDocumentationModalPr
         </div>
 
         {/* Scrollable Tab Content Body */}
-        <div className="flex-1 overflow-y-auto p-6 space-y-6 text-sm">
+        <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6 text-sm">
           {/* TAB 1: OVERVIEW & SANDBOX */}
           {activeTab === 'overview' && (
             <div className="space-y-6">
@@ -377,7 +378,8 @@ export const ComponentDocumentationModal: React.FC<ComponentDocumentationModalPr
                     <Code2 className="w-3.5 h-3.5 text-indigo-500" />
                     <span>Interactive Live Sandbox Preview</span>
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <ComponentViewModeToggle size="sm" />
                     <div className="inline-flex rounded-lg bg-slate-200/80 dark:bg-slate-800 p-0.5 text-[11px] font-mono">
                       <button
                         type="button"
