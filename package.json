@@ -1,0 +1,92 @@
+{
+  "name": "jxui-react",
+  "version": "3.0.0",
+  "description": "Next-generation React 19 component library and design system reimagining Material UI with zero-runtime CSS, 200ms spring physics, and 100% WCAG AA compliance across 351 unified components.",
+  "keywords": [
+    "react",
+    "react-19",
+    "components",
+    "design-system",
+    "material-ui",
+    "mui-replacement",
+    "tailwind",
+    "typescript",
+    "ui-library",
+    "zero-runtime-css",
+    "wcag",
+    "glassmorphism",
+    "interactive-components"
+  ],
+  "author": "Shakir (https://github.com/iam-shakir)",
+  "license": "MIT",
+  "homepage": "https://iam-shakir.github.io/JXUI-react/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iam-shakir/JXUI-react.git"
+  },
+  "bugs": {
+    "url": "https://github.com/iam-shakir/JXUI-react/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "./dist-lib/index.cjs",
+  "module": "./dist-lib/index.mjs",
+  "types": "./dist-lib/types/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist-lib/index.mjs",
+      "require": "./dist-lib/index.cjs",
+      "types": "./dist-lib/types/index.d.ts"
+    }
+  },
+  "files": [
+    "dist-lib",
+    "README.md",
+    "LICENSE"
+  ],
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0 --port 3000",
+    "build": "vite build",
+    "build:site": "vite build",
+    "build:types": "tsc -p tsconfig.lib.json",
+    "build:lib": "vite build --config vite.lib.config.ts && npm run build:types",
+    "preview": "vite preview",
+    "clean": "rm -rf dist dist-lib server.js",
+    "lint": "tsc --noEmit",
+    "test": "tsx --test src/utils/jxuiLogic.test.ts",
+    "prepublishOnly": "npm run test && npm run build:lib",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
+  },
+  "peerDependencies": {
+    "lucide-react": ">=0.400.0",
+    "motion": ">=11.0.0",
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "dependencies": {
+    "@google/genai": "^2.4.0",
+    "@tailwindcss/vite": "^4.3.3",
+    "@vitejs/plugin-react": "^6.1.1",
+    "dotenv": "^17.2.3",
+    "express": "^4.21.2",
+    "lucide-react": "^0.546.0",
+    "motion": "^12.23.24",
+    "react": "^19.0.1",
+    "react-dom": "^19.0.1",
+    "vite": "^8.3.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.14.0",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "autoprefixer": "^10.4.21",
+    "gh-pages": "^6.3.0",
+    "tailwindcss": "^4.3.3",
+    "tsx": "^4.21.0",
+    "typescript": "^7.0.2"
+  }
+}

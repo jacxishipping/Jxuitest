@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+  <link rel="icon" type="image/x-icon" href="./favicon.ico">
+  <link rel="icon" type="image/png" href="./favicon.png">
+  <link rel="manifest" href="./site.webmanifest">
+  <title>JXUI (jxui-react) — Component Library & Interactive Workbench</title>
+  <meta name="description"
+    content="Next-generation React + TypeScript component library and interactive workbench reimagining every Material UI (MUI Core, Lab, and X) component." />
+  <meta property="og:title" content="JXUI (jxui-react) — Component Library & Interactive Workbench" />
+  <meta property="og:description"
+    content="Next-generation React + TypeScript component library and interactive workbench reimagining every Material UI (MUI Core, Lab, and X) component." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="./logo.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="./logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('jxui-theme-mode') || localStorage.getItem('jxui-theme') || localStorage.getItem('theme');
+        var mode = (saved === 'dark' || saved === 'light')
+          ? saved
+          : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        var root = document.documentElement;
+        if (mode === 'dark') {
+          root.classList.add('dark');
+        } else {
+          root.classList.remove('dark');
+        }
+        root.setAttribute('data-theme', mode);
+        root.style.colorScheme = mode;
+      } catch (e) {}
+    })();
+  </script>
+</head>
+
+<body
+  class="bg-[#F8FAFC] text-slate-900 dark:bg-[#0B0F19] dark:text-slate-100 antialiased selection:bg-indigo-500/20 selection:text-indigo-600 dark:selection:text-indigo-300">
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
+</html>

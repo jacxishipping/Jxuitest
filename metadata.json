@@ -1,0 +1,6 @@
+{
+  "name": "JXUI (@jxui/react) — Component Library & Interactive Workbench",
+  "description": "Next-generation React + TypeScript component library and interactive workbench reimagining every Material UI (MUI Core, Lab, and X) component with tactile physics, glassmorphic surfaces, and zero-shift ergonomics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

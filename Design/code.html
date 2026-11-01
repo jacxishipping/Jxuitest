@@ -1,0 +1,1195 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_dashboard" name="shell-type"><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "surface-tint": "#4d44e3",
+          "tertiary-fixed": "#c9e6ff",
+          "error": "#ba1a1a",
+          "tertiary": "#004d70",
+          "surface-subtle-dark": "#1E293B",
+          "on-secondary-fixed": "#25005a",
+          "surface-container-highest": "#dae2fd",
+          "on-primary": "#ffffff",
+          "primary-fixed": "#e2dfff",
+          "primary-fixed-dim": "#c3c0ff",
+          "status-danger": "#EF4444",
+          "surface-container-high": "#e2e7ff",
+          "inverse-surface": "#283044",
+          "error-container": "#ffdad6",
+          "surface-bright": "#faf8ff",
+          "surface-subtle-light": "#F1F5F9",
+          "surface-container-low": "#f2f3ff",
+          "primary": "#3525cd",
+          "on-secondary": "#ffffff",
+          "on-tertiary": "#ffffff",
+          "primary-container": "#4f46e5",
+          "surface-elevated-dark": "#111827",
+          "on-primary-container": "#dad7ff",
+          "outline-variant": "#c7c4d8",
+          "tertiary-fixed-dim": "#89ceff",
+          "outline": "#777587",
+          "status-success": "#10B981",
+          "secondary-container": "#8a4cfc",
+          "secondary-fixed-dim": "#d2bbff",
+          "canvas-dark": "#0B0F19",
+          "on-error": "#ffffff",
+          "surface-variant": "#dae2fd",
+          "on-secondary-container": "#fffbff",
+          "tertiary-container": "#006693",
+          "on-tertiary-container": "#b8e0ff",
+          "secondary-fixed": "#eaddff",
+          "surface": "#faf8ff",
+          "on-surface-variant": "#464555",
+          "inverse-primary": "#c3c0ff",
+          "status-info": "#0EA5E9",
+          "on-secondary-fixed-variant": "#5a00c6",
+          "status-warning": "#F59E0B",
+          "surface-container-lowest": "#ffffff",
+          "background": "#faf8ff",
+          "secondary": "#712ae2",
+          "accent-rose": "#E11D48",
+          "on-primary-fixed-variant": "#3323cc",
+          "on-primary-fixed": "#0f0069",
+          "surface-container": "#eaedff",
+          "on-error-container": "#93000a",
+          "inverse-on-surface": "#eef0ff",
+          "canvas-light": "#F8FAFC",
+          "on-tertiary-fixed-variant": "#004c6e",
+          "accent-emerald": "#059669",
+          "on-tertiary-fixed": "#001e2f",
+          "on-background": "#131b2e",
+          "surface-dim": "#d2d9f4",
+          "on-surface": "#131b2e"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.25rem",
+          "lg": "0.5rem",
+          "xl": "0.75rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "gutter": "1.5rem",
+          "space-lg": "1.5rem",
+          "space-sm": "0.5rem",
+          "space-xl": "2.5rem",
+          "margin": "1.5rem",
+          "space-xs": "0.25rem",
+          "space-md": "1rem"
+        },
+        "fontFamily": {
+          "label-interactive": [
+            "Plus Jakarta Sans"
+          ],
+          "display": [
+            "Plus Jakarta Sans"
+          ],
+          "headline-lg": [
+            "Plus Jakarta Sans"
+          ],
+          "code-inline": [
+            "JetBrains Mono"
+          ],
+          "body-lg": [
+            "Plus Jakarta Sans"
+          ],
+          "display-mobile": [
+            "Plus Jakarta Sans"
+          ],
+          "subheading": [
+            "Plus Jakarta Sans"
+          ],
+          "caption": [
+            "Plus Jakarta Sans"
+          ],
+          "headline-md": [
+            "Plus Jakarta Sans"
+          ],
+          "body-sm": [
+            "Plus Jakarta Sans"
+          ],
+          "headline-sm": [
+            "Plus Jakarta Sans"
+          ]
+        },
+        "fontSize": {
+          "label-interactive": [
+            "14px",
+            {
+              "lineHeight": "18px",
+              "letterSpacing": "-0.015em",
+              "fontWeight": "600"
+            }
+          ],
+          "display": [
+            "52px",
+            {
+              "lineHeight": "58px",
+              "letterSpacing": "-0.03em",
+              "fontWeight": "800"
+            }
+          ],
+          "headline-lg": [
+            "32px",
+            {
+              "lineHeight": "38px",
+              "letterSpacing": "-0.025em",
+              "fontWeight": "700"
+            }
+          ],
+          "code-inline": [
+            "13px",
+            {
+              "lineHeight": "20px",
+              "letterSpacing": "0em",
+              "fontWeight": "500"
+            }
+          ],
+          "body-lg": [
+            "15px",
+            {
+              "lineHeight": "24px",
+              "letterSpacing": "-0.005em",
+              "fontWeight": "400"
+            }
+          ],
+          "display-mobile": [
+            "36px",
+            {
+              "lineHeight": "42px",
+              "letterSpacing": "-0.03em",
+              "fontWeight": "800"
+            }
+          ],
+          "subheading": [
+            "16px",
+            {
+              "lineHeight": "24px",
+              "letterSpacing": "-0.01em",
+              "fontWeight": "600"
+            }
+          ],
+          "caption": [
+            "12px",
+            {
+              "lineHeight": "17px",
+              "letterSpacing": "0.01em",
+              "fontWeight": "500"
+            }
+          ],
+          "headline-md": [
+            "24px",
+            {
+              "lineHeight": "31px",
+              "letterSpacing": "-0.02em",
+              "fontWeight": "700"
+            }
+          ],
+          "body-sm": [
+            "13px",
+            {
+              "lineHeight": "20px",
+              "letterSpacing": "0em",
+              "fontWeight": "400"
+            }
+          ],
+          "headline-sm": [
+            "20px",
+            {
+              "lineHeight": "27px",
+              "letterSpacing": "-0.015em",
+              "fontWeight": "600"
+            }
+          ]
+        }
+      },
+    },
+  };</script></head><body class="bg-canvas-light text-on-surface font-body-lg text-body-lg antialiased selection:bg-primary-fixed selection:text-on-primary-fixed"><aside class="fixed left-0 top-0 h-screen w-72 bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50 flex flex-col justify-between overflow-hidden"><div class="flex flex-col flex-1 min-h-0"><div class="h-16 px-space-md flex items-center justify-between bg-surface-container-lowest/90 backdrop-blur-md"><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-lg bg-primary-container text-on-primary flex items-center justify-center font-headline-sm text-headline-sm font-bold shadow-sm">JX</div><div class="flex flex-col"><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-headline-sm tracking-tight text-on-surface">JXUI</span><span class="px-1.5 py-0.5 rounded-full bg-surface-container-high text-on-surface font-caption text-caption">v2.4.0</span></div><span class="font-code-inline text-code-inline text-on-surface-variant">@jxui/react</span></div></div></div><div class="px-space-md py-space-sm"><div class="relative flex items-center"><span class="material-symbols-outlined absolute left-2.5 text-[18px] text-outline pointer-events-none">search</span><input class="w-full pl-8 pr-12 py-1.5 rounded-lg bg-surface-container-low font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:bg-surface-container-lowest transition-colors" placeholder="Filter components..." type="text"><span class="absolute right-2 px-1.5 py-0.5 rounded bg-surface-container-high font-caption text-caption text-on-surface-variant font-medium">61</span></div></div><div class="flex-1 overflow-y-auto px-space-sm py-space-xs space-y-space-md"><nav class="space-y-space-md" data-active-classes="bg-primary-container text-on-primary-container font-semibold rounded-lg shadow-sm"><div class="space-y-1"><div class="px-space-sm py-1 flex items-center justify-between"><span class="font-caption text-caption uppercase tracking-wider text-outline font-semibold">1. Inputs (14)</span><span class="material-symbols-outlined text-[16px] text-outline">tune</span></div><div class="space-y-0.5 pl-space-xs"><a class="flex items-center justify-between px-space-sm py-1.5 rounded-lg font-body-sm text-body-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="inputs-batch" href="#"><span class="">Inputs Gallery</span><span class="material-symbols-outlined text-[16px]">widgets</span></a><a class="flex items-center justify-between px-space-sm py-1.5 rounded-lg font-body-sm text-body-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="button-components" href="#"><span class="">Button &amp; Fab</span></a><a class="flex items-center justify-between px-space-sm py-1.5 rounded-lg font-body-sm text-body-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="selection-controls" href="#"><span class="">Checkbox &amp; Switch</span></a><a class="flex items-center justify-between px-space-sm py-1.5 rounded-lg font-body-sm text-body-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="form-fields" href="#"><span class="">TextField &amp; Select</span></a></div></div><div class="space-y-1"><div class="px-space-sm py-1 flex items-center justify-between"><span class="font-caption text-caption uppercase tracking-wider text-outline font-semibold">2. Data Display (10)</span><span class="material-symbols-outlined text-[16px] text-outline">bar_chart</span></div><div class="space-y-0.5 pl-space-xs"><a class="flex items-center justify-between px-space-sm py-1.5 rounded-lg font-body-sm text-body-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="data-display-batch" href="#"><span class="">Data Display Gallery</span><span class="material-symbols-outlined text-[16px]">dataset</span></a><a class="flex items-center justify-between px-space-sm py-1.5 rounded-lg font-body-sm text-body-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="badges-and-chips" href="#"><span class="">Badge, Chip, Avatar</span></a><a class="flex items-center justify-between px-space-sm py-1.5 rounded-lg font-body-sm text-body-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="tables-and-lists" href="#"><span class="">Table &amp; Sparkline</span></a></div></div><div class="space-y-1"><div class="px-space-sm py-1 flex items-center justify-between"><span class="font-caption text-caption uppercase tracking-wider text-outline font-semibold">3. Feedback (6)</span><span class="material-symbols-outlined text-[16px] text-outline">notifications_active</span></div><div class="space-y-0.5 pl-space-xs"><a class="flex items-center justify-between px-space-sm py-1.5 rounded-lg font-body-sm text-body-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="feedback-batch" href="#"><span class="">Feedback Gallery</span><span class="material-symbols-outlined text-[16px]">campaign</span></a><a class="flex items-center justify-between px-space-sm py-1.5 rounded-lg font-body-sm text-body-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="alerts-dialogs" href="#"><span class="">Alert, Dialog, Toast</span></a></div></div><div class="space-y-1"><div class="px-space-sm py-1 flex items-center justify-between"><span class="font-caption text-caption uppercase tracking-wider text-outline font-semibold">4. Surfaces (4)</span><span class="material-symbols-outlined text-[16px] text-outline">layers</span></div><div class="space-y-0.5 pl-space-xs"><a class="flex items-center justify-between px-space-sm py-1.5 rounded-lg font-body-sm text-body-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="surfaces-batch" href="#"><span class="">Card, Paper, Accordion</span></a></div></div><div class="space-y-1"><div class="px-space-sm py-1 flex items-center justify-between"><span class="font-caption text-caption uppercase tracking-wider text-outline font-semibold">5. Navigation (10)</span><span class="material-symbols-outlined text-[16px] text-outline">explore</span></div><div class="space-y-0.5 pl-space-xs"><a class="flex items-center justify-between px-space-sm py-1.5 rounded-lg font-body-sm text-body-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="navigation-batch" href="#"><span class="">Nav, Tabs &amp; Steppers</span></a></div></div><div class="space-y-1"><div class="px-space-sm py-1 flex items-center justify-between"><span class="font-caption text-caption uppercase tracking-wider text-outline font-semibold">6. Layout &amp; Lab (6)</span><span class="material-symbols-outlined text-[16px] text-outline">dashboard_customize</span></div><div class="space-y-0.5 pl-space-xs"><a class="flex items-center justify-between px-space-sm py-1.5 rounded-lg font-body-sm text-body-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="layout-lab-batch" href="#"><span class="">Grid, Stack &amp; Masonry</span></a></div></div><div class="space-y-1"><div class="px-space-sm py-1 flex items-center justify-between"><span class="font-caption text-caption uppercase tracking-wider text-outline font-semibold">7. JXUI X Advanced (5)</span><span class="material-symbols-outlined text-[16px] text-outline">auto_awesome</span></div><div class="space-y-0.5 pl-space-xs"><a class="flex items-center justify-between px-space-sm py-1.5 rounded-lg font-body-sm text-body-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="advanced-x-batch" href="#"><span class="">DataGridPro &amp; Charts</span><span class="px-1.5 py-0.5 rounded bg-tertiary text-on-tertiary font-caption text-caption">PRO</span></a></div></div><div class="space-y-1"><div class="px-space-sm py-1 flex items-center justify-between"><span class="font-caption text-caption uppercase tracking-wider text-outline font-semibold">8. Signature Blocks (6+)</span><span class="material-symbols-outlined text-[16px] text-outline">token</span></div><div class="space-y-0.5 pl-space-xs"><a class="flex items-center justify-between px-space-sm py-1.5 rounded-lg font-body-sm text-body-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="signature-blocks" href="#"><span class="">KPI, Docks &amp; Trays</span></a></div></div></nav></div></div><div class="p-space-md bg-surface-container-low/60 space-y-space-xs"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px] text-status-success">verified</span><span class="font-caption text-caption font-semibold text-on-surface">WCAG 2.1 AA Verified</span></div><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px] text-primary">code</span><span class="font-caption text-caption font-semibold text-on-surface">100% Type-Safe TypeScript</span></div><div class="pt-space-xs flex items-center justify-between text-outline font-caption text-caption"><span class="">Docs Build 24.3</span><span class="font-code-inline text-code-inline">React 19+ Ready</span></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-16 bg-surface-container-lowest/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-space-lg"><div class="flex items-center gap-space-lg"><nav class="hidden xl:flex items-center gap-space-md" data-active-classes="text-primary font-bold"><a aria-current="page" class="transition-colors text-primary font-bold" data-path="workbench-portal" href="#">Workbench</a><a class="font-label-interactive text-label-interactive text-on-surface-variant hover:text-on-surface transition-colors" data-path="components-registry" href="#">Components (61)</a><a class="font-label-interactive text-label-interactive text-on-surface-variant hover:text-on-surface transition-colors" data-path="tokens-themes" href="#">Tokens &amp; Themes</a><a class="font-label-interactive text-label-interactive text-on-surface-variant hover:text-on-surface transition-colors" data-path="wcag-standards" href="#">WCAG AA Standards</a><a class="font-label-interactive text-label-interactive text-on-surface-variant hover:text-on-surface transition-colors" data-path="documentation-guides" href="#">Docs</a></nav><div class="flex items-center gap-space-sm bg-surface-container-low hover:bg-surface-container-high px-space-md py-1.5 rounded-xl cursor-pointer transition-colors text-on-surface-variant" onclick="const m = document.getElementById('cmd-palette-modal'); if(m){ m.classList.remove('hidden'); const i = document.getElementById('cmd-palette-input'); if(i) i.focus(); }"><span class="material-symbols-outlined text-[18px]">terminal</span><span class="font-body-sm text-body-sm hidden md:inline">Quick Find / Jump to Component...</span><kbd class="px-1.5 py-0.5 rounded bg-surface-container-lowest font-code-inline text-code-inline shadow-sm text-on-surface">⌘K</kbd></div></div><div class="flex items-center gap-space-md"><div class="hidden 2xl:flex items-center gap-space-xs bg-surface-container-low p-1 rounded-xl"><button class="w-5 h-5 rounded-full bg-[#4F46E5] ring-2 ring-primary-container ring-offset-1" title="Indigo Theme"></button><button class="w-5 h-5 rounded-full bg-[#7C3AED] hover:opacity-80" title="Violet Theme"></button><button class="w-5 h-5 rounded-full bg-[#059669] hover:opacity-80" title="Emerald Theme"></button><button class="w-5 h-5 rounded-full bg-[#E11D48] hover:opacity-80" title="Rose Theme"></button><button class="w-5 h-5 rounded-full bg-[#0284C7] hover:opacity-80" title="Sky Theme"></button></div><div class="hidden lg:flex items-center bg-surface-container-low p-0.5 rounded-lg"><button class="px-2 py-0.5 rounded-md font-caption text-caption text-on-surface-variant hover:text-on-surface">0.5x</button><button class="px-2 py-0.5 rounded-md bg-surface-container-lowest font-caption text-caption font-bold text-on-surface shadow-sm">1.0x</button><button class="px-2 py-0.5 rounded-md font-caption text-caption text-on-surface-variant hover:text-on-surface">1.35x</button></div><button class="w-9 h-9 rounded-xl flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" title="Toggle Theme Mode"><span class="material-symbols-outlined text-[20px]">light_mode</span></button><a class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-surface-container-low hover:bg-surface-container-high text-on-surface font-body-sm text-body-sm font-semibold transition-colors" href="#"><span class="material-symbols-outlined text-[18px]">code_blocks</span><span class="">GitHub</span></a><div class="flex items-center gap-space-sm pl-space-xs"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1VAGrWHO7rZ6MxVkfqHl0BPwP1jt6jxVLYP7yhoEBf8L6xGbGpRWL8F8CraiyG0d6ZN-aEB_EblZ7tsct_a5fTVwvRp8uTyKmi4NriQpwVPH-ntYjdXgGi4NeYx7SNjOi4P4DbVc_8l3zJZ1Muq3CI6_YnA18lo7KA8ijXjZF1BzU7fC77MXkPw3-6Uf-D89Adnqk1i5Frq2sdbrJcv6jkELx7ZH9UKnMhno8Ade25DPr2HfMDzU9gRvQ"><div class="w-2 h-2 rounded-full bg-status-success -ml-3 mt-5 ring-2 ring-surface-container-lowest"></div></div></div></header><main class="w-full pt-16 bg-canvas-light min-h-screen px-space-lg"><div class="flex flex-col w-full">
+<!-- Top Specular Ambient Glow Layer -->
+<div class="relative w-full overflow-hidden">
+<div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[760px] h-[340px] bg-gradient-to-b from-primary/10 via-secondary-container/5 to-transparent blur-3xl pointer-events-none rounded-full"></div>
+<!-- 1. WORKBENCH HERO & TELEMETRY BANNER -->
+<div class="relative z-10 pt-4 pb-8 space-y-space-lg max-w-7xl mx-auto w-full">
+<!-- Breadcrumb Meta Strip -->
+<div class="flex flex-wrap items-center justify-between gap-4">
+<div class="flex items-center gap-2">
+<span class="px-2.5 py-1 rounded-full bg-primary-fixed text-on-primary-fixed font-caption text-caption font-semibold flex items-center gap-1 shadow-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+            v2.4.0 Production Ready
+          </span>
+<span class="text-outline font-caption text-caption">/</span>
+<span class="font-code-inline text-code-inline text-on-surface-variant font-medium">@jxui/react</span>
+<span class="text-outline font-caption text-caption">/</span>
+<span class="text-on-surface-variant font-caption text-caption">Workbench Suite</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container text-on-surface font-caption text-caption font-semibold">
+<span class="material-symbols-outlined text-[16px] text-status-success">verified</span>
+<span class="">17.4:1 AAA Contrast</span>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container text-on-surface font-caption text-caption font-semibold">
+<span class="material-symbols-outlined text-[16px] text-primary">speed</span>
+<span class="">React 19 + TS 5.8</span>
+</div>
+</div>
+</div>
+<!-- Main Headline Block with Isometric Emblem Accent -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-center">
+<div class="lg:col-span-8 space-y-space-md">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-high text-primary font-caption text-caption uppercase tracking-wider font-bold">
+<span class="material-symbols-outlined text-[14px]">bolt</span>
+            Next-Gen Drop-in MUI Replacement
+          </div>
+<h1 class="font-display text-display text-on-surface tracking-tight leading-none">
+            Tactile Ergonomics for Enterprise Interfaces
+          </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-3xl leading-relaxed">
+            A reimagined React 19 + TypeScript component architecture with spring-physics micro-interactions, strict WCAG 2.1 AA parity, and drop-in MUI API compatibility across 61 production-ready modules.
+          </p>
+<!-- Quick Action Bar -->
+<div class="flex flex-wrap items-center gap-3 pt-2">
+<!-- 1-Click Code installation button -->
+<button class="group relative flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-surface-elevated-dark text-white font-code-inline text-code-inline shadow-md hover:bg-black transition-all active:scale-[0.98]" id="copy-install-btn">
+<span class="text-tertiary-fixed-dim">$</span>
+<span class="font-semibold tracking-wide">npm i @jxui/react</span>
+<span class="material-symbols-outlined text-[18px] text-outline-variant group-hover:text-white transition-colors" id="copy-install-icon">content_copy</span>
+<span class="hidden font-label-interactive text-[11px] text-accent-emerald ml-1 font-bold" id="copy-install-feedback">COPIED</span>
+</button>
+<!-- Quick Jump to Playground -->
+<a class="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-primary-container text-on-primary font-label-interactive text-label-interactive font-semibold shadow-md hover:opacity-95 transition-all active:scale-[0.98]" href="#interactive-playground">
+<span class="">Explore 8 Batches</span>
+<span class="material-symbols-outlined text-[18px]">arrow_downward</span>
+</a>
+<!-- View Documentation Guides -->
+<a class="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-surface-container-lowest text-on-surface font-label-interactive text-label-interactive font-semibold shadow-sm hover:bg-surface-container transition-all active:scale-[0.98]" href="#token-exporter">
+<span class="material-symbols-outlined text-[18px] text-primary">data_object</span>
+<span class="">Design Tokens (W3C)</span>
+</a>
+<button class="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-surface-container-high text-on-surface font-label-interactive text-label-interactive font-semibold shadow-sm hover:bg-surface-container transition-all active:scale-[0.98]" onclick="document.getElementById('cmd-palette-modal').classList.remove('hidden')"><span class="material-symbols-outlined text-[18px] text-primary">search</span><span class="">Cmd+K Palette</span><kbd class="px-1.5 py-0.5 rounded bg-surface-container-lowest font-code-inline text-[11px] shadow-sm text-on-surface">⌘K</kbd></button><button class="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-surface-container-high text-on-surface font-label-interactive text-label-interactive font-semibold shadow-sm hover:bg-surface-container transition-all active:scale-[0.98]" onclick="const t = document.getElementById('sonner-toast-trigger-box'); if(t){ t.classList.toggle('hidden'); }"><span class="material-symbols-outlined text-[18px] text-accent-rose">notifications_active</span><span class="">Trigger Sonner Toast</span></button></div>
+</div>
+<!-- Emblem Feature Visualization -->
+<div class="lg:col-span-4 flex justify-center lg:justify-end">
+<div class="relative w-64 h-64 p-6 rounded-3xl bg-surface-container-lowest shadow-xl flex flex-col items-center justify-center overflow-hidden group">
+<div class="absolute -top-12 -right-12 w-40 h-40 bg-secondary-container/20 rounded-full blur-2xl"></div>
+<div class="absolute -bottom-10 -left-10 w-36 h-36 bg-primary/20 rounded-full blur-2xl"></div>
+<!-- Isometric 3D Layer Representation -->
+<div class="relative flex flex-col items-center justify-center space-y-2">
+<div class="w-32 h-16 rounded-2xl bg-gradient-to-r from-primary via-secondary to-secondary-container shadow-xl flex items-center justify-center transform -rotate-12 translate-y-2 transition-transform duration-300 group-hover:scale-105">
+<div class="w-14 h-7 rounded-full bg-white/30 backdrop-blur-md p-1 flex items-center justify-end shadow-inner">
+<div class="w-5 h-5 rounded-full bg-white shadow-md"></div>
+</div>
+</div>
+<div class="w-32 h-8 rounded-xl bg-surface-subtle-dark transform -rotate-12 opacity-90 shadow-md"></div>
+<div class="pt-2 text-center">
+<span class="font-headline-sm text-headline-sm font-extrabold tracking-tight text-on-surface">JXUI 2.4</span>
+<p class="font-caption text-caption text-on-surface-variant font-medium">Tactile Spring Physics</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Telemetry KPI Cards (Batch 8 JXKpiCard style) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md pt-2">
+<!-- KPI 1 -->
+<div class="p-space-md rounded-2xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all space-y-2 relative overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="font-caption text-caption uppercase tracking-wider text-outline font-bold">Total Components</span>
+<span class="px-2 py-0.5 rounded-full bg-status-success/10 text-accent-emerald font-caption text-caption font-bold">
+              100% Ready
+            </span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg font-extrabold text-on-surface">61</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">in 8 Batches</span>
+</div>
+<div class="flex items-center gap-1.5 text-on-surface-variant font-caption text-caption">
+<span class="material-symbols-outlined text-[16px] text-accent-emerald">task_alt</span>
+<span class="">Zero external CSS dependencies</span>
+</div>
+</div>
+<!-- KPI 2 -->
+<div class="p-space-md rounded-2xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all space-y-2 relative overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="font-caption text-caption uppercase tracking-wider text-outline font-bold">Accessibility Audit</span>
+<span class="px-2 py-0.5 rounded-full bg-primary-fixed text-primary font-caption text-caption font-bold">
+              WCAG 2.1 AA
+            </span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg font-extrabold text-on-surface">17.4 : 1</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">max contrast</span>
+</div>
+<div class="flex items-center gap-1.5 text-on-surface-variant font-caption text-caption">
+<span class="material-symbols-outlined text-[16px] text-status-success">keyboard</span>
+<span class="">Roving tabIndex + 3px halo</span>
+</div>
+</div>
+<!-- KPI 3 -->
+<div class="p-space-md rounded-2xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all space-y-2 relative overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="font-caption text-caption uppercase tracking-wider text-outline font-bold">Bundle Footprint</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface font-caption text-caption font-bold">
+              Gzip Core
+            </span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg font-extrabold text-on-surface">14.2 kB</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">tree-shakable</span>
+</div>
+<div class="flex items-center gap-1.5 text-on-surface-variant font-caption text-caption">
+<span class="material-symbols-outlined text-[16px] text-tertiary">alt_route</span>
+<span class="">Sub-path package exports</span>
+</div>
+</div>
+<!-- KPI 4 -->
+<div class="p-space-md rounded-2xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all space-y-2 relative overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="font-caption text-caption uppercase tracking-wider text-outline font-bold">Runtime Physics</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-fixed text-secondary font-caption text-caption font-bold">
+              Spring Damped
+            </span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg font-extrabold text-on-surface">200 ms</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">settling window</span>
+</div>
+<div class="flex items-center gap-1.5 text-on-surface-variant font-caption text-caption">
+<span class="material-symbols-outlined text-[16px] text-secondary">tune</span>
+<span class="font-code-inline text-[11px]">scale(0.98) mechanical</span>
+</div>
+</div>
+</div><div class="p-space-md rounded-2xl bg-surface-container-lowest shadow-sm space-y-space-md border border-outline-variant/30 mt-4"><div class="flex flex-wrap items-center justify-between gap-4"><div><div class="flex items-center gap-2"><span class="px-2.5 py-0.5 rounded-full bg-primary-fixed text-primary font-caption text-caption font-bold">Drop-In Migration</span><h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">MUI Core vs JXUI Ergonomics Matrix</h3></div><p class="font-body-sm text-body-sm text-on-surface-variant pt-0.5">100% API-compatible props with zero Emotion/styled-engine runtime overhead and native physics.</p></div><div class="flex items-center gap-2"><span class="px-2 py-1 rounded-lg bg-status-success/10 text-accent-emerald font-code-inline text-caption font-semibold">61 Drop-in Replacements</span><span class="px-2 py-1 rounded-lg bg-surface-container font-code-inline text-caption text-on-surface-variant font-medium">7 Core Categories (A–Z)</span></div></div><div class="grid grid-cols-1 md:grid-cols-3 gap-space-md"><div class="p-3.5 rounded-xl bg-surface-container-low space-y-1.5"><div class="flex items-center justify-between"><span class="font-caption text-caption uppercase tracking-wider text-outline font-bold">CSS Engine &amp; Styling</span><span class="px-1.5 py-0.5 rounded bg-status-danger/10 text-status-danger font-caption text-[11px] font-bold">MUI: Emotion (14kB)</span></div><div class="font-label-interactive text-label-interactive font-bold text-on-surface flex items-center gap-1.5"><span class="material-symbols-outlined text-[18px] text-accent-emerald">check_circle</span><span class="">Zero-Runtime CSS Variables + Tailwind</span></div><p class="font-caption text-caption text-on-surface-variant">No CSS-in-JS compilation stalls; sub-millisecond SSR hydration.</p></div><div class="p-3.5 rounded-xl bg-surface-container-low space-y-1.5"><div class="flex items-center justify-between"><span class="font-caption text-caption uppercase tracking-wider text-outline font-bold">Interactions &amp; Haptics</span><span class="px-1.5 py-0.5 rounded bg-status-warning/10 text-status-warning font-caption text-[11px] font-bold">MUI: CSS Ripple</span></div><div class="font-label-interactive text-label-interactive font-bold text-on-surface flex items-center gap-1.5"><span class="material-symbols-outlined text-[18px] text-accent-emerald">check_circle</span><span class="">Tactile Damped Spring Physics (200ms)</span></div><p class="font-caption text-caption text-on-surface-variant">Natural mass, damping scale(0.98), and 3px roving focus halos.</p></div><div class="p-3.5 rounded-xl bg-surface-container-low space-y-1.5"><div class="flex items-center justify-between"><span class="font-caption text-caption uppercase tracking-wider text-outline font-bold">TypeScript &amp; React 19</span><span class="px-1.5 py-0.5 rounded bg-status-info/10 text-status-info font-caption text-[11px] font-bold">MUI: React 17/18</span></div><div class="font-label-interactive text-label-interactive font-bold text-on-surface flex items-center gap-1.5"><span class="material-symbols-outlined text-[18px] text-accent-emerald">check_circle</span><span class="">Native React 19 Actions &amp; TS 5.8 Parity</span></div><p class="font-caption text-caption text-on-surface-variant">Zero type mismatch with 'as', strict polymorphic component slots.</p></div></div></div>
+</div>
+</div>
+<!-- 2. RUNTIME THEME STUDIO & CONTROLS TOOLBAR -->
+<div class="max-w-7xl mx-auto w-full my-space-md">
+<div class="p-space-md rounded-2xl bg-surface-container-lowest shadow-sm flex flex-col md:flex-row items-center justify-between gap-4">
+<div class="flex flex-wrap items-center gap-space-md">
+<!-- Palette Selector -->
+<div class="flex items-center gap-2">
+<span class="font-caption text-caption uppercase tracking-wider text-outline font-bold">Accent:</span>
+<div class="flex items-center gap-1.5 bg-surface-container p-1 rounded-xl" id="accent-controls">
+<button class="w-6 h-6 rounded-lg bg-[#4F46E5] ring-2 ring-primary-container ring-offset-2 transition-transform hover:scale-110 active:scale-95" data-accent="indigo" title="Indigo (Default)"></button>
+<button class="w-6 h-6 rounded-lg bg-[#7C3AED] transition-transform hover:scale-110 active:scale-95" data-accent="violet" title="Violet"></button>
+<button class="w-6 h-6 rounded-lg bg-[#059669] transition-transform hover:scale-110 active:scale-95" data-accent="emerald" title="Emerald"></button>
+<button class="w-6 h-6 rounded-lg bg-[#E11D48] transition-transform hover:scale-110 active:scale-95" data-accent="rose" title="Rose"></button>
+<button class="w-6 h-6 rounded-lg bg-[#0284C7] transition-transform hover:scale-110 active:scale-95" data-accent="sky" title="Sky"></button>
+</div>
+</div>
+<!-- Radius Multiplier -->
+<div class="flex items-center gap-2">
+<span class="font-caption text-caption uppercase tracking-wider text-outline font-bold">Radius:</span>
+<div class="flex items-center bg-surface-container p-1 rounded-xl font-label-interactive text-[12px]" id="radius-controls">
+<button class="px-2.5 py-1 rounded-lg text-on-surface-variant hover:text-on-surface" data-scale="sharp">0.5x</button>
+<button class="px-2.5 py-1 rounded-lg text-on-surface-variant hover:text-on-surface" data-scale="crisp">0.75x</button>
+<button class="px-2.5 py-1 rounded-lg bg-surface-container-lowest font-bold text-on-surface shadow-sm" data-scale="default">1.0x</button>
+<button class="px-2.5 py-1 rounded-lg text-on-surface-variant hover:text-on-surface" data-scale="soft">1.35x</button>
+<button class="px-2.5 py-1 rounded-lg text-on-surface-variant hover:text-on-surface" data-scale="ultra">1.75x</button>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-space-md">
+<!-- Interactive Spring & Halo Toggles -->
+<label class="flex items-center gap-2 cursor-pointer select-none">
+<div class="relative">
+<input checked="" class="sr-only peer" id="toggle-spring" type="checkbox">
+<div class="w-9 h-5 bg-surface-container-high peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+</div>
+<span class="font-caption text-caption font-semibold text-on-surface">Spring Press</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer select-none">
+<div class="relative">
+<input checked="" class="sr-only peer" id="toggle-halo" type="checkbox">
+<div class="w-9 h-5 bg-surface-container-high peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+</div>
+<span class="font-caption text-caption font-semibold text-on-surface">3px Halo Focus</span>
+</label>
+<button class="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-surface-container text-on-surface-variant hover:text-on-surface font-caption text-caption font-semibold transition-colors" id="reset-workbench">
+<span class="material-symbols-outlined text-[16px]">restart_alt</span>
+<span class="">Reset</span>
+</button>
+</div>
+</div>
+</div>
+<!-- 3. LIVE COMPONENT SHOWCASE & INTERACTIVE PLAYGROUND -->
+<div class="max-w-7xl mx-auto w-full space-y-space-xl pb-16" id="interactive-playground">
+<!-- BATCH 1: INPUTS PLAYGROUND -->
+<section class="space-y-space-md">
+<div class="flex flex-wrap items-end justify-between gap-4">
+<div>
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-primary-container text-on-primary font-code-inline text-[11px] font-bold">BATCH 01</span>
+<span class="font-headline-md text-headline-md font-bold text-on-surface">Inputs &amp; Selection Controls</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant pt-1">
+            Tactile push states, morphing async buttons, floating labels, magnetic slider scales, and rich card selection tiles.
+          </p>
+</div>
+<span class="font-code-inline text-code-inline text-on-surface-variant font-medium">#01 – #14 (14 Components)</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-md">
+<!-- JXButton Gallery Card -->
+<div class="p-space-md rounded-2xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all space-y-space-md">
+<div class="flex items-center justify-between">
+<span class="font-subheading text-subheading font-bold text-on-surface">JXButton Variants</span>
+<span class="font-code-inline text-[11px] text-primary bg-primary-fixed px-2 py-0.5 rounded">#02</span>
+</div>
+<div class="flex flex-wrap gap-2.5 items-center">
+<!-- Contained -->
+<button class="px-4 py-2 rounded-xl bg-primary-container text-on-primary font-label-interactive text-label-interactive shadow-sm hover:opacity-95 active:scale-[0.98] transition-all">
+              Contained
+            </button>
+<!-- Soft -->
+<button class="px-4 py-2 rounded-xl bg-primary-fixed text-primary font-label-interactive text-label-interactive hover:bg-primary-fixed-dim active:scale-[0.98] transition-all">
+              Soft
+            </button>
+<!-- Outlined (hairline surface) -->
+<button class="px-4 py-2 rounded-xl bg-surface-container text-on-surface font-label-interactive text-label-interactive hover:bg-surface-container-high active:scale-[0.98] transition-all">
+              Outlined
+            </button>
+<!-- Ghost -->
+<button class="px-4 py-2 rounded-xl text-on-surface-variant hover:text-on-surface hover:bg-surface-container active:scale-[0.98] transition-all font-label-interactive text-label-interactive">
+              Ghost
+            </button>
+</div>
+<!-- Dynamic States: morphSuccess & loading -->
+<div class="pt-2 flex flex-wrap gap-2.5 items-center">
+<button class="flex items-center gap-2 px-4 py-2 rounded-xl bg-primary-container text-on-primary font-label-interactive text-label-interactive transition-all active:scale-[0.98]" id="morph-demo-btn">
+<span class="material-symbols-outlined text-[18px]">publish</span>
+<span id="morph-demo-label" class="">morphSuccess</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 rounded-xl bg-surface-container text-on-surface font-label-interactive text-label-interactive active:scale-[0.98]" id="loading-demo-btn">
+<span class="material-symbols-outlined text-[18px] animate-spin text-primary">progress_activity</span>
+<span class="">loading={true}</span>
+</button>
+</div>
+</div>
+<!-- JXTextField & Autocomplete -->
+<div class="p-space-md rounded-2xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all space-y-space-md">
+<div class="flex items-center justify-between">
+<span class="font-subheading text-subheading font-bold text-on-surface">JXTextField &amp; Autocomplete</span>
+<span class="font-code-inline text-[11px] text-primary bg-primary-fixed px-2 py-0.5 rounded">#01 / #11</span>
+</div>
+<!-- Text Field with Copyable Token -->
+<div class="space-y-1">
+<label class="font-caption text-caption text-on-surface-variant font-semibold">API Public Key (copyable)</label>
+<div class="relative flex items-center">
+<input class="w-full pl-3 pr-10 py-2 rounded-xl bg-surface-container-low font-code-inline text-code-inline text-on-surface focus:outline-none focus:bg-surface-container-lowest transition-colors shadow-inner" readonly="" type="text" value="pk_live_9f82d2c184ea0">
+<button class="absolute right-2 p-1 rounded-lg hover:bg-surface-container transition-colors" onclick="navigator.clipboard.writeText('pk_live_9f82d2c184ea0'); this.innerHTML='&lt;span class=\'material-symbols-outlined text-[18px] text-accent-emerald\'&gt;check&lt;/span&gt;'; setTimeout(()=&gt;this.innerHTML='&lt;span class=\'material-symbols-outlined text-[18px] text-outline\'&gt;content_copy&lt;/span&gt;', 1500);" title="Copy API key">
+<span class="material-symbols-outlined text-[18px] text-outline">content_copy</span>
+</button>
+</div>
+</div>
+<!-- Autocomplete Multi-tag -->
+<div class="space-y-1">
+<label class="font-caption text-caption text-on-surface-variant font-semibold">Framework Tags</label>
+<div class="flex flex-wrap items-center gap-1.5 p-2 rounded-xl bg-surface-container-low min-h-[44px]">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg bg-surface-container-lowest text-on-surface font-caption text-caption font-semibold shadow-sm">
+<span class="">React 19</span>
+<span class="material-symbols-outlined text-[14px] cursor-pointer text-outline hover:text-error">close</span>
+</span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg bg-surface-container-lowest text-on-surface font-caption text-caption font-semibold shadow-sm">
+<span class="">TypeScript</span>
+<span class="material-symbols-outlined text-[14px] cursor-pointer text-outline hover:text-error">close</span>
+</span>
+<input class="bg-transparent font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none px-1 flex-1 min-w-[70px]" placeholder="Add tag..." type="text">
+</div>
+</div>
+</div>
+<!-- JXSwitch & Checkbox (cardMode) -->
+<div class="p-space-md rounded-2xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all space-y-space-md">
+<div class="flex items-center justify-between">
+<span class="font-subheading text-subheading font-bold text-on-surface">Card-Mode Controls</span>
+<span class="font-code-inline text-[11px] text-primary bg-primary-fixed px-2 py-0.5 rounded">#04 / #10</span>
+</div>
+<!-- Selectable Card 1 (Switch) -->
+<label class="flex items-center justify-between p-3 rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors cursor-pointer select-none">
+<div class="space-y-0.5">
+<span class="font-label-interactive text-label-interactive font-semibold text-on-surface">Spring Compression</span>
+<p class="font-caption text-caption text-on-surface-variant">active:scale-[0.98] tactile response</p>
+</div>
+<div class="relative">
+<input checked="" class="sr-only peer" type="checkbox">
+<div class="w-10 h-6 bg-surface-container-high peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary shadow-sm"></div>
+</div>
+</label>
+<!-- Selectable Card 2 (Checkbox) -->
+<label class="flex items-center gap-3 p-3 rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors cursor-pointer select-none">
+<input checked="" class="w-5 h-5 rounded-md accent-primary cursor-pointer" type="checkbox">
+<div class="space-y-0.5">
+<span class="font-label-interactive text-label-interactive font-semibold text-on-surface">Telemetry Ingestion</span>
+<p class="font-caption text-caption text-on-surface-variant">Stream live performance metrics</p>
+</div>
+</label>
+</div>
+<!-- JXSlider Range Controls -->
+<div class="p-space-md rounded-2xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all space-y-space-md">
+<div class="flex items-center justify-between">
+<span class="font-subheading text-subheading font-bold text-on-surface">JXSlider Range Controls</span>
+<span class="font-code-inline text-[11px] text-primary bg-primary-fixed px-2 py-0.5 rounded">#09</span>
+</div>
+<div class="space-y-3">
+<div class="flex items-center justify-between font-caption text-caption">
+<span class="text-on-surface-variant font-semibold">Spring Tension</span>
+<span class="font-code-inline font-bold text-primary px-2 py-0.5 rounded bg-primary-fixed" id="slider-tension-val">180 N/m</span>
+</div>
+<input class="w-full h-2 bg-surface-container-high rounded-lg appearance-none cursor-pointer accent-primary" id="slider-tension" max="300" min="100" type="range" value="180">
+<div class="flex justify-between font-caption text-caption text-outline">
+<span class="">Soft (100)</span>
+<span class="">180 (Default)</span>
+<span class="">Rigid (300)</span>
+</div>
+</div>
+</div>
+<!-- JXRating Precision -->
+<div class="p-space-md rounded-2xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all space-y-space-md">
+<div class="flex items-center justify-between">
+<span class="font-subheading text-subheading font-bold text-on-surface">JXRating Half-Star</span>
+<span class="font-code-inline text-[11px] text-primary bg-primary-fixed px-2 py-0.5 rounded">#07</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="flex items-center text-status-warning cursor-pointer">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">star_half</span>
+</div>
+<span class="font-headline-sm text-headline-sm font-extrabold text-on-surface">4.85</span>
+<span class="font-caption text-caption text-on-surface-variant">(1,420 ratings)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-2 py-1 rounded-lg bg-surface-container font-caption text-caption text-on-surface-variant">Hover precision: 0.5 step</span>
+<span class="px-2 py-1 rounded-lg bg-surface-container font-caption text-caption text-accent-emerald font-semibold">Verified</span>
+</div>
+</div>
+<!-- JXSegmentedControl View -->
+<div class="p-space-md rounded-2xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all space-y-space-md">
+<div class="flex items-center justify-between">
+<span class="font-subheading text-subheading font-bold text-on-surface">JXSegmentedControl</span>
+<span class="font-code-inline text-[11px] text-primary bg-primary-fixed px-2 py-0.5 rounded">#59</span>
+</div>
+<div class="flex bg-surface-container p-1 rounded-xl" id="seg-demo-control">
+<button class="flex-1 py-1.5 rounded-lg bg-surface-container-lowest font-label-interactive text-label-interactive font-bold text-on-surface shadow-sm text-center">Interactive</button>
+<button class="flex-1 py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface font-label-interactive text-label-interactive text-center">Schema</button>
+<button class="flex-1 py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface font-label-interactive text-label-interactive text-center">Export</button>
+</div>
+<p class="font-caption text-caption text-on-surface-variant">
+            Zero layout-shift pill tracker with spring-animated backdrop sliding.
+          </p>
+</div>
+</div>
+</section>
+<!-- BATCH 2 & 8: DATA DISPLAY & TELEMETRY -->
+<section class="space-y-space-md">
+<div class="flex flex-wrap items-end justify-between gap-4">
+<div>
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-tertiary-container text-on-tertiary-container font-code-inline text-[11px] font-bold">BATCH 02 &amp; 08</span>
+<span class="font-headline-md text-headline-md font-bold text-on-surface">Data Display, Avatars &amp; Telemetry Status</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant pt-1">
+            Pulsing status radar pills, interactive SVG sparklines, hover avatar fan-outs, and copyable token chips.
+          </p>
+</div>
+<span class="font-code-inline text-code-inline text-on-surface-variant font-medium">#15 – #24 &amp; #58</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- Avatars & AvatarGroup -->
+<div class="p-space-md rounded-2xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all space-y-space-md">
+<div class="flex items-center justify-between">
+<span class="font-subheading text-subheading font-bold text-on-surface">JXAvatar &amp; Group</span>
+<span class="font-code-inline text-[11px] text-primary bg-primary-fixed px-2 py-0.5 rounded">#15</span>
+</div>
+<div class="flex items-center">
+<div class="flex -space-x-3 overflow-hidden p-1">
+<div class="relative group cursor-pointer">
+<img class="inline-block h-10 w-10 rounded-full object-cover shadow-sm transition-transform hover:scale-110" data-alt="Close up modern engineering lead female developer portrait with warm studio lighting and neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBs_yPMLXuadniU2V20nTFeklmGLYOQO7xHvgk9HIhVtMgcEUSZ7zBmsKOuWttDvEn-GnQ5trj4oVCE3s2XLvEY48iBd_JGoOfsBgBeY_O12tDe1vVM4Iq2TCcgCkZM1BOK8oBRLzzs4CkmX1XuzIeJ9002TRDyDJjwRpU7ZPC0MLbl3-_MdXJ4tgY-vKFuHSEHtUvU_bdeZ79B8eiExBGjZOpm-kSooBxjewOVEk">
+<span class="absolute bottom-0 right-0 block h-2.5 w-2.5 rounded-full bg-status-success"></span>
+</div>
+<div class="relative group cursor-pointer">
+<img class="inline-block h-10 w-10 rounded-full object-cover shadow-sm transition-transform hover:scale-110" data-alt="Portrait of senior UI architect male with glasses soft focused natural light background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBvDZjvuio5WQl-4-TlCoJSOV-7wIln3wFZwg2Q8DwL8SZBCqynGRM8VrGCIGxz9vZuiya6TilTBY2iaWNLe1GILozVAneWevp5ww76CGcrh4OvCKmbGiQSchtfq7SDef7LORz-HrLkZoPq_39knBlpfv53hFA_CBP8IkA9kCUyHS6n24ImmfERMTb1xSrlvLJSrBmsVTjH5Duc5RX8iEIMZqkM40kDQ9BzLwIFIo">
+<span class="absolute bottom-0 right-0 block h-2.5 w-2.5 rounded-full bg-status-success"></span>
+</div>
+<div class="relative group cursor-pointer">
+<img class="inline-block h-10 w-10 rounded-full object-cover shadow-sm transition-transform hover:scale-110" data-alt="Portrait of product design engineer smiling in clean white studio setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGHrjPpjzpn76xzkggzUE0mEJmvaUFwjpsoYrQNSgyunTI-L4FemUz-i7CK_Bd-XRnTcdJ2ii53TBwXHnbOj2bohgM6kQz-6oe5W3lW5F4hcrPAvHqXnGF9KYJGx9wbucCQlKiwMcgtJQCiPdNUhj8OMtDnvGXP8SoXepsKFGQlYaAnfVRJmPQdP7g8jXwLDVICw9ckqDZAX2CwMO4QfyAP__tkpCTCXDQltoc8sU">
+<span class="absolute bottom-0 right-0 block h-2.5 w-2.5 rounded-full bg-status-warning"></span>
+</div>
+<div class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary-fixed text-primary font-caption text-caption font-bold shadow-sm">
+                +14
+              </div>
+</div>
+</div>
+<p class="font-caption text-caption text-on-surface-variant">Hover fan-out with live presence rings</p>
+</div>
+<!-- JXChip Gallery -->
+<div class="p-space-md rounded-2xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all space-y-space-md">
+<div class="flex items-center justify-between">
+<span class="font-subheading text-subheading font-bold text-on-surface">JXChip Gallery</span>
+<span class="font-code-inline text-[11px] text-primary bg-primary-fixed px-2 py-0.5 rounded">#17</span>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="px-2.5 py-1 rounded-full bg-primary-fixed text-primary font-caption text-caption font-bold">Soft Accent</span>
+<span class="px-2.5 py-1 rounded-full bg-surface-container text-on-surface font-caption text-caption font-semibold">Outlined</span>
+<span class="px-2.5 py-1 rounded-full bg-status-success/10 text-accent-emerald font-caption text-caption font-bold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-accent-emerald"></span>
+              Healthy
+            </span>
+<span class="px-2.5 py-1 rounded-full bg-surface-container-low text-on-surface font-code-inline text-[11px] font-medium flex items-center gap-1">
+<span class="">0x8F94</span>
+<span class="material-symbols-outlined text-[12px] text-outline">content_copy</span>
+</span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant">Click-to-copy mono chips &amp; soft pills</p>
+</div>
+<!-- JXStatusPill Radar Pulses -->
+<div class="p-space-md rounded-2xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all space-y-space-md">
+<div class="flex items-center justify-between">
+<span class="font-subheading text-subheading font-bold text-on-surface">JXStatusPill</span>
+<span class="font-code-inline text-[11px] text-primary bg-primary-fixed px-2 py-0.5 rounded">#58</span>
+</div>
+<div class="space-y-2">
+<div class="flex items-center justify-between px-3 py-1.5 rounded-xl bg-surface-container-low">
+<div class="flex items-center gap-2">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-status-success opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-status-success"></span>
+</span>
+<span class="font-caption text-caption font-bold text-on-surface">Operational</span>
+</div>
+<span class="font-code-inline text-[11px] text-on-surface-variant">99.98%</span>
+</div>
+<div class="flex items-center justify-between px-3 py-1.5 rounded-xl bg-surface-container-low">
+<div class="flex items-center gap-2">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-status-warning opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-status-warning"></span>
+</span>
+<span class="font-caption text-caption font-bold text-on-surface">Canary 10%</span>
+</div>
+<span class="font-code-inline text-[11px] text-on-surface-variant">v2.4.1-rc</span>
+</div>
+</div>
+</div>
+<!-- JXSparkline Trend Charts -->
+<div class="p-space-md rounded-2xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all space-y-space-md">
+<div class="flex items-center justify-between">
+<span class="font-subheading text-subheading font-bold text-on-surface">JXSparkline</span>
+<span class="font-code-inline text-[11px] text-primary bg-primary-fixed px-2 py-0.5 rounded">#24</span>
+</div>
+<div class="space-y-1">
+<div class="flex items-baseline justify-between">
+<span class="font-headline-sm text-headline-sm font-extrabold text-on-surface">42.8k req/s</span>
+<span class="font-code-inline text-caption text-accent-emerald font-bold">+18.4%</span>
+</div>
+<!-- Smooth Inline SVG Area Chart -->
+<div class="w-full h-12 pt-1">
+<svg class="w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 160 40">
+<defs>
+<linearGradient id="spark-grad" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#4F46E5" stop-opacity="0.3"></stop>
+<stop offset="100%" stop-color="#4F46E5" stop-opacity="0.0"></stop>
+</linearGradient>
+</defs>
+<path d="M 0,35 Q 20,32 40,24 T 80,18 T 120,8 T 160,2 L 160,40 L 0,40 Z" fill="url(#spark-grad)"></path>
+<path d="M 0,35 Q 20,32 40,24 T 80,18 T 120,8 T 160,2" fill="none" stroke="#4F46E5" stroke-linecap="round" stroke-width="2.5"></path>
+<circle cx="160" cy="2" fill="#4F46E5" r="3"></circle>
+</svg>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- BATCH 7: JXUI X ADVANCED TELEMETRY & DATAGRID PRO -->
+<section class="space-y-space-md">
+<div class="flex flex-wrap items-end justify-between gap-4">
+<div>
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-tertiary text-on-tertiary font-code-inline text-[11px] font-bold">BATCH 07 (PRO)</span>
+<span class="font-headline-md text-headline-md font-bold text-on-surface">JXUI X Advanced: DataGridPro &amp; Telemetry Gauges</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant pt-1">
+            Enterprise high-density data tables, multi-column sorting, column search chips, SVG arc gauges, and date-range pickers.
+          </p>
+</div>
+<span class="font-code-inline text-code-inline text-on-surface-variant font-medium">#51 – #55 (5 Modules)</span>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-md">
+<!-- JXDataGridPro Table (8 cols) -->
+<div class="lg:col-span-8 p-space-md rounded-2xl bg-surface-container-lowest shadow-sm space-y-space-md overflow-hidden">
+<!-- Toolbar -->
+<div class="flex flex-wrap items-center justify-between gap-3 pb-1">
+<div class="flex items-center gap-2">
+<span class="font-subheading text-subheading font-bold text-on-surface">JXDataGridPro</span>
+<span class="px-2 py-0.5 rounded bg-surface-container font-caption text-caption text-on-surface-variant">32 rows pinned</span>
+</div>
+<div class="flex items-center gap-2">
+<!-- Filter Chip -->
+<button class="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface font-caption text-caption font-semibold transition-colors">
+<span class="material-symbols-outlined text-[16px]">filter_list</span>
+<span class="">Status: Active</span>
+</button>
+<!-- Density switch -->
+<button class="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-surface-container-low text-on-surface font-caption text-caption font-semibold">
+<span class="material-symbols-outlined text-[16px]">density_medium</span>
+</button>
+<!-- Export -->
+<button class="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-primary-fixed text-primary font-caption text-caption font-bold hover:bg-primary-fixed-dim transition-colors">
+<span class="material-symbols-outlined text-[16px]">download</span>
+<span class="">Export CSV</span>
+</button>
+</div>
+</div>
+<!-- Table Container -->
+<div class="w-full overflow-x-auto">
+<table class="w-full text-left font-body-sm text-body-sm">
+<thead class="bg-surface-container-low text-on-surface-variant font-caption text-caption uppercase tracking-wider font-bold">
+<tr>
+<th class="p-3 rounded-l-xl"><input class="rounded accent-primary" type="checkbox"></th>
+<th class="p-3">Component / ID</th>
+<th class="p-3">Severity / Category</th>
+<th class="p-3">Bundle Gzip</th>
+<th class="p-3">Status</th>
+<th class="p-3 text-right rounded-r-xl">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-low">
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="p-3"><input checked="" class="rounded accent-primary" type="checkbox"></td>
+<td class="p-3 font-semibold text-on-surface">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="">JXButton</span>
+<span class="font-code-inline text-[11px] text-outline">#02</span>
+</div>
+</td>
+<td class="p-3 text-on-surface-variant">Inputs / Primary</td>
+<td class="p-3 font-code-inline text-code-inline">2.4 kB</td>
+<td class="p-3">
+<span class="px-2 py-0.5 rounded-full bg-status-success/10 text-accent-emerald font-caption text-caption font-bold">Verified AA</span>
+</td>
+<td class="p-3 text-right">
+<button class="p-1 rounded-lg hover:bg-surface-container text-outline hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[18px]">more_horiz</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="p-3"><input checked="" class="rounded accent-primary" type="checkbox"></td>
+<td class="p-3 font-semibold text-on-surface">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="">JXDataGridPro</span>
+<span class="font-code-inline text-[11px] text-outline">#51</span>
+</div>
+</td>
+<td class="p-3 text-on-surface-variant">Advanced X / Grid</td>
+<td class="p-3 font-code-inline text-code-inline">8.9 kB</td>
+<td class="p-3">
+<span class="px-2 py-0.5 rounded-full bg-status-success/10 text-accent-emerald font-caption text-caption font-bold">Verified AA</span>
+</td>
+<td class="p-3 text-right">
+<button class="p-1 rounded-lg hover:bg-surface-container text-outline hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[18px]">more_horiz</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="p-3"><input class="rounded accent-primary" type="checkbox"></td>
+<td class="p-3 font-semibold text-on-surface">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="">JXDock</span>
+<span class="font-code-inline text-[11px] text-outline">Ext A</span>
+</div>
+</td>
+<td class="p-3 text-on-surface-variant">Signature / Spatial</td>
+<td class="p-3 font-code-inline text-code-inline">3.1 kB</td>
+<td class="p-3">
+<span class="px-2 py-0.5 rounded-full bg-status-info/10 text-status-info font-caption text-caption font-bold">Experimental</span>
+</td>
+<td class="p-3 text-right">
+<button class="p-1 rounded-lg hover:bg-surface-container text-outline hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[18px]">more_horiz</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- JXGauge Telemetry & DateRangePicker (4 cols) -->
+<div class="lg:col-span-4 space-y-space-md">
+<!-- JXGauge Semi-Circular Telemetry -->
+<div class="p-space-md rounded-2xl bg-surface-container-lowest shadow-sm space-y-space-md">
+<div class="flex items-center justify-between">
+<span class="font-subheading text-subheading font-bold text-on-surface">JXGauge Telemetry</span>
+<span class="font-code-inline text-[11px] text-primary bg-primary-fixed px-2 py-0.5 rounded">#55</span>
+</div>
+<!-- SVG Semi-circle gauge -->
+<div class="flex flex-col items-center justify-center relative py-2">
+<svg class="w-48 h-28" viewBox="0 0 200 110">
+<!-- Track -->
+<path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="#E2E8F0" stroke-linecap="round" stroke-width="16"></path>
+<!-- Active Arc (84.6%) -->
+<path d="M 20 100 A 80 80 0 0 1 155 42" fill="none" stroke="#4F46E5" stroke-linecap="round" stroke-width="16"></path>
+</svg>
+<div class="absolute bottom-2 text-center">
+<span class="font-display-mobile text-display-mobile font-extrabold text-on-surface tracking-tight">84.6%</span>
+<p class="font-caption text-caption text-on-surface-variant font-semibold">Throughput Quota</p>
+</div>
+</div>
+<div class="flex items-center justify-between pt-1 font-caption text-caption text-on-surface-variant">
+<span class="">Threshold: Nominal</span>
+<span class="text-accent-emerald font-bold">+4.2% headroom</span>
+</div>
+</div>
+<!-- JXDateRangePicker Preset Trigger -->
+<div class="p-space-md rounded-2xl bg-surface-container-lowest shadow-sm space-y-3">
+<div class="flex items-center justify-between">
+<span class="font-subheading text-subheading font-bold text-on-surface">JXDateRangePicker</span>
+<span class="font-code-inline text-[11px] text-primary bg-primary-fixed px-2 py-0.5 rounded">#52</span>
+</div>
+<div class="flex items-center gap-2 p-2.5 rounded-xl bg-surface-container-low cursor-pointer hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[18px] text-primary">calendar_month</span>
+<span class="font-body-sm text-body-sm font-semibold text-on-surface">Oct 1, 2024 – Oct 31, 2024</span>
+<span class="ml-auto px-2 py-0.5 rounded bg-surface-container-lowest text-on-surface font-caption text-caption font-bold shadow-sm">QTD</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- BATCH 3 & 4: FEEDBACK & SURFACES -->
+<section class="space-y-space-md">
+<div class="flex flex-wrap items-end justify-between gap-4">
+<div>
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-secondary-container text-on-secondary-container font-code-inline text-[11px] font-bold">BATCH 03 &amp; 04</span>
+<span class="font-headline-md text-headline-md font-bold text-on-surface">Feedback, Toasts &amp; Glass Surfaces</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant pt-1">
+            Semantic alerts with specular hairlines, auto-dismiss snackbars with progress countdowns, and glass cards.
+          </p>
+</div>
+<span class="font-code-inline text-code-inline text-on-surface-variant font-medium">#25 – #34 (10 Components)</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- JXAlert Showcase -->
+<div class="p-space-md rounded-2xl bg-surface-container-lowest shadow-sm space-y-space-md">
+<div class="flex items-center justify-between">
+<span class="font-subheading text-subheading font-bold text-on-surface">JXAlert Severity States</span>
+<span class="font-code-inline text-[11px] text-primary bg-primary-fixed px-2 py-0.5 rounded">#25</span>
+</div>
+<div class="space-y-2.5">
+<!-- Success Alert -->
+<div class="p-3.5 rounded-xl bg-status-success/10 flex items-start gap-3">
+<span class="material-symbols-outlined text-[20px] text-accent-emerald mt-0.5">check_circle</span>
+<div class="space-y-0.5 flex-1">
+<span class="font-label-interactive text-label-interactive font-bold text-on-surface">All 61 Modules Compiled</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Zero TypeScript warnings; tree-shaking manifests validated.</p>
+</div>
+</div>
+<!-- Warning Alert -->
+<div class="p-3.5 rounded-xl bg-status-warning/10 flex items-start gap-3">
+<span class="material-symbols-outlined text-[20px] text-status-warning mt-0.5">warning</span>
+<div class="space-y-0.5 flex-1">
+<span class="font-label-interactive text-label-interactive font-bold text-on-surface">Sub-path Deprecation Notice</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Migrate from legacy MUI '@mui/material' imports before v3.0.</p>
+</div>
+<button class="font-caption text-caption text-on-surface font-bold underline">Migrate</button>
+</div>
+<!-- Danger Alert -->
+<div class="p-3.5 rounded-xl bg-status-danger/10 flex items-start gap-3">
+<span class="material-symbols-outlined text-[20px] text-status-danger mt-0.5">error</span>
+<div class="space-y-0.5 flex-1">
+<span class="font-label-interactive text-label-interactive font-bold text-on-surface">Stale Cache Detected</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Vite warm cache requires rebuild for custom token variables.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- JXSnackbar Toast & JXCard Glass Surface -->
+<div class="p-space-md rounded-2xl bg-surface-container-lowest shadow-sm space-y-space-md">
+<div class="flex items-center justify-between">
+<span class="font-subheading text-subheading font-bold text-on-surface">JXSnackbar &amp; Tactile Glass Card</span>
+<span class="font-code-inline text-[11px] text-primary bg-primary-fixed px-2 py-0.5 rounded">#30 / #33</span>
+</div>
+<!-- Toast Preview -->
+<div class="p-3.5 rounded-xl bg-surface-subtle-dark text-white shadow-xl space-y-2 relative overflow-hidden">
+<div class="flex items-center justify-between gap-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-status-success">cloud_done</span>
+<span class="font-label-interactive text-label-interactive font-semibold">Changes synced to production</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-2 py-0.5 rounded bg-white/20 text-white font-caption text-caption font-bold hover:bg-white/30 transition-colors">Undo</button>
+<span class="material-symbols-outlined text-[16px] text-outline cursor-pointer hover:text-white">close</span>
+</div>
+</div>
+<!-- Auto dismiss countdown indicator bar -->
+<div class="w-full h-1 bg-white/10 rounded-full overflow-hidden">
+<div class="w-2/3 h-full bg-primary-container rounded-full animate-pulse"></div>
+</div>
+</div>
+<!-- JXCard with Specular Top Hairline -->
+<div class="p-4 rounded-xl bg-surface-container-low shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all space-y-2">
+<div class="flex items-center justify-between">
+<span class="font-subheading text-subheading font-bold text-on-surface">Elevated Surface (Level 2)</span>
+<span class="material-symbols-outlined text-[18px] text-primary">layers</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Surfaces pair low-opacity dual-layer ambient shadows with top-edge specular inner highlights for physical tactile depth.
+            </p>
+</div>
+</div>
+</div>
+</section>
+<!-- BATCH 8 SIGNATURE BLOCKS: JXDOCK & JXCODEBLOCK -->
+<section class="space-y-space-md">
+<div class="flex flex-wrap items-end justify-between gap-4">
+<div>
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-primary text-on-primary font-code-inline text-[11px] font-bold">BATCH 08</span>
+<span class="font-headline-md text-headline-md font-bold text-on-surface">Signature Blocks: JXDock &amp; JXCodeBlock</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant pt-1">
+            macOS-inspired magnetic floating glass dock and multi-tab TSX/Bash code block with 1-click clipboard feedback.
+          </p>
+</div>
+<span class="font-code-inline text-code-inline text-on-surface-variant font-medium">Ext A &amp; #61</span>
+</div>
+<!-- JXDock Preview Area -->
+<div class="p-8 rounded-3xl bg-surface-container-high/40 shadow-inner flex flex-col items-center justify-center space-y-6">
+<span class="font-caption text-caption text-on-surface-variant uppercase tracking-wider font-bold">Interactive Spatial Dock (Hover Icons)</span>
+<!-- macOS inspired floating glass dock -->
+<div class="flex items-end gap-3 px-4 py-3 rounded-2xl bg-white/80 backdrop-blur-xl shadow-xl transition-all" id="jxdock-bar">
+<button class="dock-item p-2.5 rounded-xl bg-surface-container hover:bg-primary-container hover:text-white transition-all transform hover:-translate-y-3 hover:scale-125 text-on-surface shadow-sm" title="Components">
+<span class="material-symbols-outlined text-[24px]">widgets</span>
+</button>
+<button class="dock-item p-2.5 rounded-xl bg-surface-container hover:bg-primary-container hover:text-white transition-all transform hover:-translate-y-3 hover:scale-125 text-on-surface shadow-sm" title="Theme Studio">
+<span class="material-symbols-outlined text-[24px]">palette</span>
+</button>
+<button class="dock-item p-2.5 rounded-xl bg-surface-container hover:bg-primary-container hover:text-white transition-all transform hover:-translate-y-3 hover:scale-125 text-on-surface shadow-sm" title="DataGrid Pro">
+<span class="material-symbols-outlined text-[24px]">table_chart</span>
+</button>
+<button class="dock-item p-2.5 rounded-xl bg-surface-container hover:bg-primary-container hover:text-white transition-all transform hover:-translate-y-3 hover:scale-125 text-on-surface shadow-sm" title="Accessibility Audit">
+<span class="material-symbols-outlined text-[24px]">verified</span>
+</button>
+<div class="w-px h-8 bg-outline-variant self-center mx-1"></div>
+<button class="dock-item p-2.5 rounded-xl bg-surface-container hover:bg-primary-container hover:text-white transition-all transform hover:-translate-y-3 hover:scale-125 text-on-surface shadow-sm" title="Terminal Snippet">
+<span class="material-symbols-outlined text-[24px]">terminal</span>
+</button>
+</div>
+<p class="font-caption text-caption text-on-surface-variant">
+          Velocity-based Gaussian icon magnification with auto-hide idle physics.
+        </p>
+</div>
+<!-- JXCodeBlock Terminal Block -->
+<div class="rounded-2xl bg-surface-elevated-dark text-white shadow-xl overflow-hidden">
+<!-- Header Strip -->
+<div class="flex items-center justify-between px-space-md py-3 bg-canvas-dark">
+<div class="flex items-center gap-2">
+<div class="flex items-center gap-1.5 pr-2">
+<span class="w-3 h-3 rounded-full bg-status-danger/80"></span>
+<span class="w-3 h-3 rounded-full bg-status-warning/80"></span>
+<span class="w-3 h-3 rounded-full bg-status-success/80"></span>
+</div>
+<div class="flex items-center gap-1">
+<button class="px-3 py-1 rounded-md bg-surface-subtle-dark text-white font-code-inline text-code-inline font-semibold">App.tsx</button>
+<button class="px-3 py-1 rounded-md text-outline hover:text-white font-code-inline text-code-inline">bash</button>
+</div>
+</div>
+<button class="flex items-center gap-1 px-3 py-1 rounded-lg bg-surface-subtle-dark hover:bg-surface-container-low/20 text-on-surface-variant hover:text-white font-caption text-caption font-semibold transition-colors" id="copy-code-block-btn">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+<span id="copy-code-label" class="">Copy TSX</span>
+</button>
+</div>
+<!-- Code Content -->
+<div class="p-space-md overflow-x-auto font-code-inline text-code-inline text-[#c9d1d9] space-y-1">
+<div class="text-[#8b949e]">// 1. Drop-in import replacing '@mui/material'</div>
+<div class=""><span class="text-[#ff7b72]">import</span> { <span class="text-[#79c0ff]">JXButton</span>, <span class="text-[#79c0ff]">JXCard</span>, <span class="text-[#79c0ff]">JXDataGridPro</span>, <span class="text-[#79c0ff]">JXDock</span> } <span class="text-[#ff7b72]">from</span> <span class="text-[#a5d6ff]">'@jxui/react'</span>;</div>
+<div class="pt-2"><span class="text-[#ff7b72]">export default function</span> <span class="text-[#d2a8ff]">EnterpriseDashboard</span>() {</div>
+<div class="pl-4"><span class="text-[#ff7b72]">return</span> (</div>
+<div class="pl-8">&lt;<span class="text-[#7ee787]">JXCard</span> <span class="text-[#79c0ff]">variant</span>=<span class="text-[#a5d6ff]">"elevated"</span> <span class="text-[#79c0ff]">elevation</span>={<span class="text-[#79c0ff]">2</span>} <span class="text-[#79c0ff]">spring</span>&gt;</div>
+<div class="pl-12">&lt;<span class="text-[#7ee787]">JXButton</span> <span class="text-[#79c0ff]">variant</span>=<span class="text-[#a5d6ff]">"contained"</span> <span class="text-[#79c0ff]">spring</span> <span class="text-[#79c0ff]">halo</span> <span class="text-[#79c0ff]">morphSuccess</span>&gt;</div>
+<div class="pl-16">Deploy to Production</div>
+<div class="pl-12">&lt;/<span class="text-[#7ee787]">JXButton</span>&gt;</div>
+<div class="pl-8">&lt;/<span class="text-[#7ee787]">JXCard</span>&gt;</div>
+<div class="pl-4">);</div>
+<div class="">}</div>
+</div>
+</div>
+</section>
+<!-- 4. DESIGN TOKEN EXPORTER & ACCESSIBILITY MATRIX -->
+<section class="space-y-space-md pt-4" id="token-exporter">
+<div class="flex flex-wrap items-end justify-between gap-4">
+<div>
+<span class="font-caption text-caption uppercase tracking-wider text-outline font-bold">Standardization &amp; Compliance</span>
+<h2 class="font-headline-md text-headline-md font-bold text-on-surface">Design Tokens (W3C / CSS) &amp; WCAG AA Matrix</h2>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-2.5 py-1 rounded-full bg-status-success/10 text-accent-emerald font-caption text-caption font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+<span class="">4 Pillars Verified</span>
+</span>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-md">
+<!-- Token Exporter Preview (7 cols) -->
+<div class="lg:col-span-7 p-space-md rounded-2xl bg-surface-container-lowest shadow-sm space-y-space-md">
+<div class="flex items-center justify-between">
+<span class="font-subheading text-subheading font-bold text-on-surface">Runtime CSS Variables Export</span>
+<div class="flex items-center gap-1">
+<span class="font-code-inline text-[11px] text-on-surface-variant">--jx-radius-scale: 1.0</span>
+</div>
+</div>
+<div class="p-3.5 rounded-xl bg-surface-container-low font-code-inline text-[12px] text-on-surface space-y-1 overflow-x-auto shadow-inner">
+<div class=""><span class="text-primary font-bold">--jx-primary:</span> #4F46E5;</div>
+<div class=""><span class="text-primary font-bold">--jx-halo:</span> 0 0 0 3px rgba(99, 102, 241, 0.18);</div>
+<div class=""><span class="text-on-surface-variant font-bold">--jx-bg:</span> #F8FAFC; <span class="text-outline">// Warm Alabaster Canvas</span></div>
+<div class=""><span class="text-on-surface-variant font-bold">--jx-surface:</span> #FFFFFF; <span class="text-outline">// Elevated Crisp White</span></div>
+<div class=""><span class="text-secondary font-bold">--jx-spring-easing:</span> cubic-bezier(0.22, 1, 0.36, 1);</div>
+<div class=""><span class="text-secondary font-bold">--jx-press-scale:</span> 0.98;</div>
+</div>
+<div class="flex items-center justify-between pt-1">
+<span class="font-caption text-caption text-on-surface-variant">Export formats: W3C Design Tokens JSON / CSS Variables</span>
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-primary-container text-on-primary font-label-interactive text-label-interactive font-semibold hover:opacity-95 transition-opacity">
+<span class="material-symbols-outlined text-[16px]">file_download</span>
+<span class="">Download Tokens</span>
+</button>
+</div>
+</div>
+<!-- WCAG 2.1 AA Checklist (5 cols) -->
+<div class="lg:col-span-5 p-space-md rounded-2xl bg-surface-container-lowest shadow-sm space-y-space-md">
+<div class="flex items-center justify-between">
+<span class="font-subheading text-subheading font-bold text-on-surface">Accessibility Checklist</span>
+<span class="font-caption text-caption text-accent-emerald font-bold">100% Pass</span>
+</div>
+<div class="space-y-2.5">
+<div class="p-2.5 rounded-xl bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-accent-emerald">check_circle</span>
+<span class="font-label-interactive text-label-interactive text-on-surface">1. Perceivable</span>
+</div>
+<span class="font-caption text-caption text-outline font-semibold">17.4:1 AAA</span>
+</div>
+<div class="p-2.5 rounded-xl bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-accent-emerald">check_circle</span>
+<span class="font-label-interactive text-label-interactive text-on-surface">2. Operable</span>
+</div>
+<span class="font-caption text-caption text-outline font-semibold">Roving tabIndex</span>
+</div>
+<div class="p-2.5 rounded-xl bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-accent-emerald">check_circle</span>
+<span class="font-label-interactive text-label-interactive text-on-surface">3. Understandable</span>
+</div>
+<span class="font-caption text-caption text-outline font-semibold">aria-describedby</span>
+</div>
+<div class="p-2.5 rounded-xl bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-accent-emerald">check_circle</span>
+<span class="font-label-interactive text-label-interactive text-on-surface">4. Robust</span>
+</div>
+<span class="font-caption text-caption text-outline font-semibold">aria-live polite</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+<script>
+  // 1-Click Code Copy for Install Command
+  const installBtn = document.getElementById('copy-install-btn');
+  const installIcon = document.getElementById('copy-install-icon');
+  const installFeedback = document.getElementById('copy-install-feedback');
+
+  if (installBtn) {
+    installBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText('npm i @jxui/react');
+      installIcon.classList.add('hidden');
+      installFeedback.classList.remove('hidden');
+      setTimeout(() => {
+        installIcon.classList.remove('hidden');
+        installFeedback.classList.add('hidden');
+      }, 1800);
+    });
+  }
+
+  // morphSuccess Interactive Demonstration
+  const morphBtn = document.getElementById('morph-demo-btn');
+  const morphLabel = document.getElementById('morph-demo-label');
+  if (morphBtn && morphLabel) {
+    morphBtn.addEventListener('click', () => {
+      morphBtn.classList.remove('bg-primary-container');
+      morphBtn.classList.add('bg-[#10B981]');
+      morphBtn.innerHTML = '<span class="material-symbols-outlined text-[18px]">done</span><span>Confirmed (1800ms)</span>';
+      setTimeout(() => {
+        morphBtn.classList.remove('bg-[#10B981]');
+        morphBtn.classList.add('bg-primary-container');
+        morphBtn.innerHTML = '<span class="material-symbols-outlined text-[18px]">publish</span><span>morphSuccess</span>';
+      }, 1800);
+    });
+  }
+
+  // JXCodeBlock Copy Demonstration
+  const copyCodeBtn = document.getElementById('copy-code-block-btn');
+  const copyCodeLabel = document.getElementById('copy-code-label');
+  if (copyCodeBtn && copyCodeLabel) {
+    copyCodeBtn.addEventListener('click', () => {
+      copyCodeLabel.textContent = 'Copied!';
+      setTimeout(() => {
+        copyCodeLabel.textContent = 'Copy TSX';
+      }, 1800);
+    });
+  }
+
+  // Slider Tension Live Readout
+  const sliderTension = document.getElementById('slider-tension');
+  const sliderTensionVal = document.getElementById('slider-tension-val');
+  if (sliderTension && sliderTensionVal) {
+    sliderTension.addEventListener('input', (e) => {
+      sliderTensionVal.textContent = `${e.target.value} N/m`;
+    });
+  }
+
+  // Interactive Theme Palette Switcher Feedback
+  const accentButtons = document.querySelectorAll('#accent-controls button');
+  accentButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      accentButtons.forEach(b => b.classList.remove('ring-2', 'ring-primary-container', 'ring-offset-2'));
+      btn.classList.add('ring-2', 'ring-primary-container', 'ring-offset-2');
+    });
+  });
+
+  // Radius Scale Multiplier Feedback
+  const radiusButtons = document.querySelectorAll('#radius-controls button');
+  radiusButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      radiusButtons.forEach(b => {
+        b.classList.remove('bg-surface-container-lowest', 'font-bold', 'shadow-sm');
+        b.classList.add('text-on-surface-variant');
+      });
+      btn.classList.add('bg-surface-container-lowest', 'font-bold', 'shadow-sm');
+      btn.classList.remove('text-on-surface-variant');
+    });
+  });
+
+  // Segmented Control Demo Switcher
+  const segButtons = document.querySelectorAll('#seg-demo-control button');
+  segButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      segButtons.forEach(b => {
+        b.classList.remove('bg-surface-container-lowest', 'font-bold', 'text-on-surface', 'shadow-sm');
+        b.classList.add('text-on-surface-variant');
+      });
+      btn.classList.add('bg-surface-container-lowest', 'font-bold', 'text-on-surface', 'shadow-sm');
+      btn.classList.remove('text-on-surface-variant');
+    });
+  });
+</script><!-- Interactive JXUI Command Palette Modal (Cmd+K) --><div id="cmd-palette-modal" class="hidden fixed inset-0 z-50 flex items-start justify-center pt-24 bg-black/50 backdrop-blur-sm p-4"><div class="w-full max-w-2xl rounded-2xl bg-surface-container-lowest shadow-2xl border border-surface-container-high overflow-hidden animate-in"><div class="flex items-center px-4 py-3 border-b border-surface-container-low gap-3"><span class="material-symbols-outlined text-[20px] text-primary">search</span><input type="text" placeholder="Search all 61 components across 7 A-to-Z categories..." class="w-full bg-transparent font-body-lg text-body-lg text-on-surface placeholder:text-outline focus:outline-none" id="cmd-palette-input" autofocus=""><button onclick="document.getElementById('cmd-palette-modal').classList.add('hidden')" class="px-2 py-1 rounded-lg text-on-surface-variant hover:bg-surface-container font-caption text-caption font-bold"><span class="material-symbols-outlined text-[18px]">close</span></button></div><div class="p-3 space-y-2 max-h-96 overflow-y-auto"><div class="px-2 py-1 font-caption text-caption uppercase tracking-wider text-outline font-bold">Categories (7 A–Z)</div><div class="space-y-1"><div class="flex items-center justify-between p-2 rounded-xl bg-surface-container-low hover:bg-surface-container cursor-pointer transition-colors"><div class="flex items-center gap-2.5"><span class="material-symbols-outlined text-[18px] text-primary">tune</span><span class="font-body-sm font-semibold text-on-surface">1. Inputs &amp; Form Controls (14 components)</span></div><span class="font-code-inline text-[11px] text-on-surface-variant">Button, TextField, Slider</span></div><div class="flex items-center justify-between p-2 rounded-xl hover:bg-surface-container cursor-pointer transition-colors"><div class="flex items-center gap-2.5"><span class="material-symbols-outlined text-[18px] text-secondary">bar_chart</span><span class="font-body-sm font-semibold text-on-surface">2. Data Display &amp; Telemetry (10 components)</span></div><span class="font-code-inline text-[11px] text-on-surface-variant">Avatar, Sparkline, Chip</span></div><div class="flex items-center justify-between p-2 rounded-xl hover:bg-surface-container cursor-pointer transition-colors"><div class="flex items-center gap-2.5"><span class="material-symbols-outlined text-[18px] text-accent-emerald">notifications_active</span><span class="font-body-sm font-semibold text-on-surface">3. Feedback &amp; Toasts (6 components)</span></div><span class="font-code-inline text-[11px] text-on-surface-variant">Alert, Toast, Sonner</span></div><div class="flex items-center justify-between p-2 rounded-xl hover:bg-surface-container cursor-pointer transition-colors"><div class="flex items-center gap-2.5"><span class="material-symbols-outlined text-[18px] text-primary-container">layers</span><span class="font-body-sm font-semibold text-on-surface">4. Surfaces &amp; Cards (4 components)</span></div><span class="font-code-inline text-[11px] text-on-surface-variant">Glass Card, Paper</span></div><div class="flex items-center justify-between p-2 rounded-xl hover:bg-surface-container cursor-pointer transition-colors"><div class="flex items-center gap-2.5"><span class="material-symbols-outlined text-[18px] text-status-warning">explore</span><span class="font-body-sm font-semibold text-on-surface">5. Navigation &amp; Menus (10 components)</span></div><span class="font-code-inline text-[11px] text-on-surface-variant">Breadcrumb, Stepper, Tabs</span></div><div class="flex items-center justify-between p-2 rounded-xl hover:bg-surface-container cursor-pointer transition-colors"><div class="flex items-center gap-2.5"><span class="material-symbols-outlined text-[18px] text-tertiary-container">dashboard_customize</span><span class="font-body-sm font-semibold text-on-surface">6. Layout &amp; Lab (6 components)</span></div><span class="font-code-inline text-[11px] text-on-surface-variant">Grid, Stack, Masonry</span></div><div class="flex items-center justify-between p-2 rounded-xl hover:bg-surface-container cursor-pointer transition-colors"><div class="flex items-center gap-2.5"><span class="material-symbols-outlined text-[18px] text-secondary-container">auto_awesome</span><span class="font-body-sm font-semibold text-on-surface">7. JXUI X Advanced &amp; Signature Blocks (11 components)</span></div><span class="font-code-inline text-[11px] text-on-surface-variant">DataGridPro, JXDock</span></div></div></div><div class="flex items-center justify-between px-4 py-2.5 bg-surface-container-low font-caption text-caption text-on-surface-variant border-t border-surface-container-high"><div class="flex items-center gap-2"><kbd class="px-1.5 py-0.5 rounded bg-surface-container-lowest font-code-inline text-[11px] shadow-sm">↑↓</kbd><span class="">to navigate</span><kbd class="px-1.5 py-0.5 rounded bg-surface-container-lowest font-code-inline text-[11px] shadow-sm ml-2">ESC</kbd><span class="">to close</span></div><span class="font-code-inline text-[11px] text-primary font-semibold">@jxui/react v2.4.0</span></div></div></div><!-- Floating Interactive Sonner Toast Stack Container --><div id="sonner-toast-trigger-box" class="hidden fixed bottom-6 right-6 z-50 space-y-2 max-w-sm w-full"><div class="p-4 rounded-2xl bg-surface-elevated-dark text-white shadow-2xl border border-surface-subtle-dark flex items-start justify-between gap-3 transform transition-all"><div class="flex items-start gap-3"><div class="w-8 h-8 rounded-lg bg-status-success/20 text-accent-emerald flex items-center justify-center"><span class="material-symbols-outlined text-[20px]">verified</span></div><div><h4 class="font-label-interactive text-label-interactive font-bold">Sonner Stack: Toast #1</h4><p class="font-caption text-caption text-on-surface-variant text-[#c9d1d9]">Tactile spring toast queued with 3200ms settling time.</p></div></div><button onclick="this.closest('#sonner-toast-trigger-box').classList.add('hidden')" class="text-outline hover:text-white"><span class="material-symbols-outlined text-[18px]">close</span></button></div></div></main></div>
+
+</body></html>
